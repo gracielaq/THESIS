@@ -26,14 +26,14 @@ public class Main {
                 CSV READER
                     Returns SOP of tweets in data sheet
                 */
-                //System.out.println(date + " " + tw + " " + mention );
+                System.out.println(date + " " + tw + " " + mention );
                 
                 /*
                 Stop Words Removal
                    Returns SOP of whole tweet without Stop Words 
                 */
-               String postStopWords= stop.StopWordsRemoval(date + " " + tw + " " + mention +"\n");
-               tokenize.TokenizeStopWords(postStopWords);
+               //String postStopWords= stop.StopWordsRemoval(date + " " + tw + " " + mention +"\n");
+               //tokenize.TokenizeStopWords(postStopWords);
        
                 
                 /*Train Files*/
