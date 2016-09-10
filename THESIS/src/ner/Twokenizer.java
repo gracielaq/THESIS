@@ -269,7 +269,9 @@ public class Twokenizer {
 	}
 	
 	
-	public static ArrayList<String> tokenizeFile(File folder){
+	public static ArrayList<ArrayList<String>> tokenizeFile(File folder){
+		
+		ArrayList<ArrayList<String>> tweets = new ArrayList<>();
 		
 		ArrayList<String> tokens = new ArrayList<String>();
 		Twokenizer twokenizer = new Twokenizer();
@@ -289,7 +291,7 @@ public class Twokenizer {
 					
 					System.out.println(str);
 					
-					return new ArrayList<String>(twokenizer.twokenize(str));
+					tweets.add(new ArrayList<String>(twokenizer.twokenize(str)));
 
 					//for (String token : tokens) {
 						//System.out.print(token + "|");
@@ -304,7 +306,7 @@ public class Twokenizer {
 			}
 		}
 		
-		return null;
+		return tweets;
 	}
 
 	public static void main(String[] args) throws IOException {

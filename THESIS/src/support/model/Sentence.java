@@ -25,13 +25,10 @@ public class Sentence {
 	}
 	
 	public Sentence(ArrayList<String> tokens){
+		sentence=new ArrayList<Token>();
 		for(int x=0;x<tokens.size();x++){
 			Token temp = new Token();
 			temp.setWord(tokens.get(x));
-	
-			//temp.setNERTag(token);
-			//temp.setPOSTag(token);
-			//System.out.println(token);
 			sentence.add(temp);
 		}
 	

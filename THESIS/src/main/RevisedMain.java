@@ -73,11 +73,16 @@ public class RevisedMain {
 			e1.printStackTrace();
 		}
 		//Start NER
-		//start twokenizer
+			//start twokenizer
+		ArrayList<ArrayList<String>> preNER=Twokenizer.tokenizeFile(new File("ModelAndTrain/training/Earthquake"));
 		
-		ArrayList<String> preNER=Twokenizer.tokenizeFile(new File("ModelAndTrain/training/Earthquake"));
-		SomidiaNERImpl ner=new SomidiaNERImpl();
-		ner.execute(new Sentence(preNER));
-
+		
+		ArrayList<Sentence> postNER = new ArrayList<>();
+		for(ArrayList<String> tweet:preNER){
+			SomidiaNERImpl ner=new SomidiaNERImpl();
+			Sentence NamedEntities=ner.execute(new Sentence(tweet));
+			System.out.println(NamedEntities);
+			postNER.add(NamedEntities);
+		}
 	}
 }

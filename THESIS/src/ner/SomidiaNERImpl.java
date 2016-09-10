@@ -14,11 +14,10 @@ import support.model.Token;
  */
 public class SomidiaNERImpl implements NERInterface {
 
-	
 	@Override
 	public Sentence execute(Sentence tweet) {
 		// TODO Auto-generated method stub
-		File file = new File("./resources/NamedEntityRecognizerDictModel");
+		File file = new File("ModelAndTrain/NamedEntityRecognizerDictModel");
 		Scanner s = null;
 
 		for (int i = 0; i < tweet.getLength(); i++) {

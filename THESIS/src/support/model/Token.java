@@ -15,7 +15,7 @@ public class Token {
 	 * @param word the word to set
 	 */
 	public void setWord(String word) {
-		System.out.println("TOKEN:"+word);
+		//System.out.println("TOKEN:"+word);
 		Word = word;
 	}
 	/**
