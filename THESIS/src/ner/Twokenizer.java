@@ -289,7 +289,8 @@ public class Twokenizer {
 				while (s.hasNextLine()) {
 					str=s.nextLine();
 					
-					System.out.println(str);
+					//print Tokenize
+					//System.out.println(str);
 					
 					tweets.add(new ArrayList<String>(twokenizer.twokenize(str)));
 
