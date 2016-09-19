@@ -38,7 +38,10 @@ public class SomidiaNERImpl implements NERInterface {
 					category = "location";
 				} else if(line.contains("MONTH")){
 					category = "month";
-				} else if (token.getWord().equalsIgnoreCase(line.toString())) {
+				} else if(line.contains("DAY")){
+					category = "day";
+				} 
+				else if (token.getWord().equalsIgnoreCase(line.toString())) {
 					token.setNERTag(category);
 					tweet.replaceToken(i, token);
 				}

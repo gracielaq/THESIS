@@ -32,7 +32,10 @@ public class SomidiaHashNERImpl implements NERInterface {
 					category = "location";
 				} else if (line.contains("MONTH")) {
 					category = "month";
-				} else {
+				} else if(line.contains("DAY")){
+					category ="day";
+				}
+				else {
 					lookup.put(line, category);
 				}
 			}

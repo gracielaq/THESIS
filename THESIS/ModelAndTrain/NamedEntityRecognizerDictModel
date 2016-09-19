@@ -14,9 +14,11 @@ volunteer
 volunteers
 food
 <Category>: LOCATION
+oriental mindoro
 Abalos
 Adamson University
 Agora
+Alaminos
 De La Salle University Manila
 Welcome Rotonda
 Bulusan
@@ -855,6 +857,7 @@ baco
 bacobo
 bacolod
 bacood
+bacoor
 bacood elementary school
 badajos
 badjao
@@ -1043,6 +1046,7 @@ basilio estanislao
 basilio valdez
 basswood
 bataan
+batac
 batanes
 batangas
 batangas east
@@ -2555,34 +2559,34 @@ dizon
 dna aniceta
 dna maria
 dna virginia
-do�a anastacia
-do�a andrea avenue
-do�a annie
-do�a aurora
-do�a carmen
-do�a cristeta
-do�a esperanza
-do�a eva
-do�a gracia
-do�a imelda
-do�a irenea avenue
-do�a josefa barangay hall
-do�a juana rodriguez 1
-do�a juana rodriguez 2
-do�a julia vargas avenue
-do�a justina avenue
-do�a leonila
-do�a luz
-do�a manuela avenue
-do�a manuela elementary school
-do�a maria d. fabros memorial school
-do�a moneng
-do�a pilar aguire avenue
-do�a pilar aguirre
-do�a rita diaz
-do�a soledad avenue
-do�a teodora alonzo high school
-do�a trinidad
+doña anastacia
+doña andrea avenue
+doña annie
+doña aurora
+doña carmen
+doña cristeta
+doña esperanza
+doña eva
+doña gracia
+doña imelda
+doña irenea avenue
+doña josefa barangay hall
+doña juana rodriguez 1
+doña juana rodriguez 2
+doña julia vargas avenue
+doña justina avenue
+doña leonila
+doña luz
+doña manuela avenue
+doña manuela elementary school
+doña maria d. fabros memorial school
+doña moneng
+doña pilar aguire avenue
+doña pilar aguirre
+doña rita diaz
+doña soledad avenue
+doña teodora alonzo high school
+doña trinidad
 dodge
 dodona
 dogwood
@@ -5320,6 +5324,7 @@ malugay
 malunggay
 malvar
 mamamante
+mamburao
 manacop
 manager
 manalac
@@ -5470,6 +5475,7 @@ maricara zaldariaga
 maricel fortuno
 marigold
 marigold street
+marihatag
 marikina
 marikina catholic school
 marikina city hall
@@ -6216,6 +6222,7 @@ obrero barangay school
 obsession
 obudan
 ocampo
+occidental mindoro
 ocean drive
 ochre
 octagon
@@ -6473,7 +6480,6 @@ padriga road
 padrigal
 paete
 pagapas
-pagasa
 pag-asa
 pagataan
 pagatpat
@@ -6570,16 +6576,17 @@ papaya
 papaya  st.
 papillon
 paquita
-para�aque central elementary school
-para�aque central police station
-para�aque city hall
-para�aque city traffic headquarter
-para�aque community high school
-para�aque elementary school
-para�aque elementary school ii
-para�aque police general headquarters
-para�aque precint 4
-para�aque science high school
+paracle
+parañaque central elementary school
+parañaque central police station
+parañaque city hall
+parañaque city traffic headquarter
+parañaque community high school
+parañaque elementary school
+parañaque elementary school ii
+parañaque police general headquarters
+parañaque precint 4
+parañaque science high school
 parada barangay hall
 parada elementary school
 parada road
@@ -7622,7 +7629,6 @@ s. tuazon
 s. veloso
 s.c. vizcarra
 s.fernando
-sabado
 sabalo
 saber
 sabino roman
@@ -7867,6 +7873,7 @@ san juan del monte predencia
 san juan elementary school
 san juanico
 san judas tadeo
+san julian
 san lazaro
 san leonardo
 san lorenzo
@@ -8704,6 +8711,8 @@ supply coordination office
 supreme court
 supreme court centennial building
 surigao
+surigao del sur
+surigao del norte
 surinam
 susana
 susana avenue
@@ -9572,6 +9581,29 @@ zuellig loop
 zulueta
 zulueta circle
 zurich
+cuyo island
+<Category>: DAY
+Monday
+Mon
+Tuesday
+Tues
+Wednesday
+Wed
+Thursday
+Thurs
+Friday
+Fri
+Saturday
+Sat
+Sunday
+Sun
+Lunes
+Martes
+Miyerkules
+Huwebes
+Biyernes
+Sabado 
+Linggo
 <Category>: MONTH
 January
 February
@@ -9759,4 +9791,104 @@ maulang
 raining non stop
 masamang panahon
 non stop rain
-magnitude
+magnitude 1
+magnitude 1.0
+magnitude 1.1
+magnitude 1.2
+magnitude 1.3
+magnitude 1.4
+magnitude 1.5 
+magnitude 1.6
+magnitude 1.7
+magnitude 1.8
+magnitude 1.9
+magnitude 2.0
+magnitude 2
+magnitude 2.1
+magnitude 2.2
+magnitude 2.3
+magnitude 2.4
+magnitude 2.5
+magnitude 2.6
+magnitude 2.7
+magnitude 2.8
+magnitude 2.9
+magnitude 3
+magnitude 3.0
+magnitude 3.1
+magnitude 3.2
+magnitude 3.3
+magnitude 3.4
+magnitude 3.5
+magnitude 3.6
+magnitude 3.7
+magnitude 3.8
+magnitude 3.9
+magnitude 4.0
+magnitude 4
+magnitude 4.1
+magnitude 4.2
+magnitude 4.3
+magnitude 4.4
+magnitude 4.5
+magnitude 4.6
+magnitude 4.7
+magnitude 4.8
+magnitude 4.9 
+magnitude 5.0
+magnitude 5
+magnitude 5.1
+magnitude 5.2
+magnitude 5.3
+magnitude 5.4
+magnitude 5.5
+magnitude 5.6
+magnitude 5.7
+magnitude 5.8
+magnitude 5.9
+magnitude 6.0
+magnitude 6 
+magnitude 6.1
+magnitude 6.2
+magnitude 6.3
+magnitude 6.4
+magnitude 6.5
+magnitude 6.6
+magnitude 6.7
+magnitude 6.8
+magnitude 6.9
+magnitude 7
+magnitude 7.0
+magnitude 7.1
+magnitude 7.2
+magnitude 7.3
+magnitude 7.4
+magnitude 7.5
+magnitude 7.6
+magnitude 7.7
+magnitude 7.8
+magnitude 7.9
+magnitude 8
+magnitude 8.0
+magnitude 8.1
+magnitude 8.2
+magnitude 8.3
+magnitude 8.4
+magnitude 8.5
+magnitude 8.6
+magnitude 8.7
+magnitude 8.8
+magnitude 8.9
+magnitude 9
+magnitude 9.0
+magnitude 9.1
+magnitude 9.2
+magnitude 9.3
+magnitude 9.4
+magnitude 9.5
+magnitude 9.6
+magnitude 9.7
+magnitude 9.8
+magnitude 9.9
+magnitude 10
+magnitude 10.0

@@ -63,9 +63,15 @@ public class Twokenizer {
 	// '^' is added since Java Regex uses '^word$' for exact matching 'word' in
 	// the string 'word',
 	// not in the string 'abcword'
+	
 	private static Pattern Contractions = Pattern.compile("(?i)^(\\w+)(n't|'ve|'ll|'d|'re|'s|'m)$");
 	private static Pattern Whitespace = Pattern.compile("\\s+");
-
+	
+	//magnitude or signal + number
+	private static String magnitude = "\\s*((\\d)|(\\d.\\d))*\\s[Mm]agnitude\\s((\\d.\\d)|(\\d))*";
+	private static String signal = "[sS]ignal\\s(([nN]o.)|[#])\\s*\\d";
+	private static String typhoonName = "[Bb]agyong\\s((#\\S+)|([Aa-zZ]+))";
+	
 	private static String punctChars = "['“\\\".?!,:;]";
 	private static String punctSeq = punctChars + "+";
 	private static String entity = "&(amp|lt|gt|quot);";
@@ -124,11 +130,14 @@ public class Twokenizer {
 
 	// Delimiters
 	private static Pattern Protected = Pattern.compile(
-			"(" + emoticon + "|" 
+			"(" + emoticon + "|"  
+				+ magnitude + "|"
+				+ signal + "|"
+				+ typhoonName + "|"
 				+ url + "|" 
 				+ entity + "|"
 				+ properNamesSpecial + "|" 
-				+ properNames + "|" 
+				+ properNames + "|"
 				+ timeLike + "|" 
 				+ numNum + "|" 
 				+ numberWithCommas + "|"
