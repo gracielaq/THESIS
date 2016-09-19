@@ -2,13 +2,12 @@ package main;
 
 import Classifier.SVM.Test;
 import Classifier.SVM.Train;
-import au.com.bytecode.opencsv.CSVWriter;
 import liblinear.InvalidInputDataException;
 import ner.SomidiaNERImpl;
 import ner.Twokenizer;
+import lib.*;
 import preprocess.csv.CSVPreProcess;
 import support.model.Sentence;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -24,6 +23,7 @@ public class RevisedMain {
 	public static void main(String args[]) {
 		CSVPreProcess.createTestFiles(new File(testSetCSV));
 		CSVPreProcess.createTrainingFile(new File(trainingSetCSV));
+	
 		/*
 		 * SVM CLASSIFIER To add more classes, go to ModelAndTrain and add in
 		 * Category.txt also add a folder in training in ModelAndTrain and
@@ -31,7 +31,7 @@ public class RevisedMain {
 		 */
 		// Train SVM
 		String[] TrainArgs = { "ModelAndTrain/Category.txt", "ModelAndTrain/training" };
-
+		
 		try {
 			Train.main(TrainArgs);
 		} catch (IOException | InvalidInputDataException e) {
@@ -54,7 +54,7 @@ public class RevisedMain {
 			String words = br.readLine();
 
 			String csv = "./WekaResources/DataSet.csv";
-			CSVWriter writer = new CSVWriter(new FileWriter(csv));
+			au.com.bytecode.opencsv.CSVWriter writer = new au.com.bytecode.opencsv.CSVWriter(new FileWriter(csv));
 
 			String[] header = words.split(",");
 			writer.writeNext(header);

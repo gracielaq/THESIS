@@ -1,4 +1,3 @@
 0 Earthquake
 1 Flood
 2 Typhoon
-3 Others
