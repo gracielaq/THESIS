@@ -8,6 +8,9 @@ import ner.Twokenizer;
 import lib.*;
 import preprocess.csv.CSVPreProcess;
 import support.model.Sentence;
+import support.model.Token;
+import template.TemplateModule;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -23,22 +26,24 @@ public class RevisedMain {
 	public static void main(String args[]) {
 		CSVPreProcess.createTestFiles(new File(testSetCSV));
 		CSVPreProcess.createTrainingFile(new File(trainingSetCSV));
-	
+
 		/*
 		 * SVM CLASSIFIER To add more classes, go to ModelAndTrain and add in
 		 * Category.txt also add a folder in training in ModelAndTrain and
 		 * update dev_label.txt
 		 */
 		// Train SVM
-		String[] TrainArgs = { "ModelAndTrain/Category.txt", "ModelAndTrain/training" };
-		
+		String[] TrainArgs = { "ModelAndTrain/Category.txt",
+				"ModelAndTrain/training" };
+
 		try {
 			Train.main(TrainArgs);
 		} catch (IOException | InvalidInputDataException e) {
 			e.printStackTrace();
 		}
 		// Test SVM
-		String[] testArgs = { "ModelAndTrain/dev_label.txt", "ModelAndTrain/dev" };
+		String[] testArgs = { "ModelAndTrain/dev_label.txt",
+				"ModelAndTrain/dev" };
 
 		try {
 			Test.main(testArgs);
@@ -46,21 +51,24 @@ public class RevisedMain {
 			e.printStackTrace();
 		}
 		// convert unique_words.txt to csv headers
-		/*CONVERT TO WEKA RESOURCES*/
+		/* CONVERT TO WEKA RESOURCES */
 		try {
 			// read unique_words.txt
-			BufferedReader br = new BufferedReader(new FileReader("unique_words.txt"));
+			BufferedReader br = new BufferedReader(new FileReader(
+					"unique_words.txt"));
 
 			String words = br.readLine();
 
 			String csv = "./WekaResources/DataSet.csv";
-			au.com.bytecode.opencsv.CSVWriter writer = new au.com.bytecode.opencsv.CSVWriter(new FileWriter(csv));
+			au.com.bytecode.opencsv.CSVWriter writer = new au.com.bytecode.opencsv.CSVWriter(
+					new FileWriter(csv));
 
 			String[] header = words.split(",");
 			writer.writeNext(header);
 			List<String[]> allData = new ArrayList<String[]>();
 			for (int i = 0; i < 3; i++) {
-				String[] data = new String[] { "Blogger" + i, "20" + i, "20.0002", i + " World Wide Web" };
+				String[] data = new String[] { "Blogger" + i, "20" + i,
+						"20.0002", i + " World Wide Web" };
 				allData.add(data);
 			}
 
@@ -72,29 +80,40 @@ public class RevisedMain {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		//Start NER
-			//start twokenizer
-		//Earthquake
-		ArrayList<ArrayList<String>> preNER=Twokenizer.tokenizeFile(new File("ModelAndTrain/training/Earthquake"));
-		
-		
+		// Start NER
+		// start twokenizer
+		// Typhoon
+		ArrayList<ArrayList<String>> preNER = Twokenizer.tokenizeFile(new File(
+				"ModelAndTrain/training/Typhoon"));
+
 		ArrayList<Sentence> postNER = new ArrayList<>();
-		for(ArrayList<String> tweet:preNER){
-			SomidiaNERImpl ner=new SomidiaNERImpl();
-			Sentence NamedEntities=ner.execute(new Sentence(tweet));
+		for (ArrayList<String> tweet : preNER) {
+			SomidiaNERImpl ner = new SomidiaNERImpl();
+			Sentence NamedEntities = ner.execute(new Sentence(tweet));
+			System.out
+					.println("TWEET CATEGORY: " + NamedEntities.getCategory());
 			System.out.println(NamedEntities);
 			postNER.add(NamedEntities);
+
+			ArrayList<Token> tokenList = TemplateModule.processSentence(NamedEntities);
+			for(Token token :tokenList){
+				token.PrintToken();
+				System.out.print("\n");
+			}
+			
+
 		}
-		//Typhoon
-		/*ArrayList<ArrayList<String>> preNER2=Twokenizer.tokenizeFile(new File("ModelAndTrain/training/Typhoon"));
-		
-		
-		ArrayList<Sentence> postNER2 = new ArrayList<>();
-		for(ArrayList<String> tweet:preNER2){
-			SomidiaNERImpl ner=new SomidiaNERImpl();
-			Sentence NamedEntities=ner.execute(new Sentence(tweet));
-			System.out.println(NamedEntities);
-			postNER2.add(NamedEntities);
-		}*/
+
+		// Earthquake
+		 ArrayList<ArrayList<String>> preNER2=Twokenizer.tokenizeFile(new
+		 File("ModelAndTrain/training/Earthquake"));
+		  
+		  
+		 ArrayList<Sentence> postNER2 = new ArrayList<>();
+		 for(ArrayList<String> tweet:preNER2){ SomidiaNERImpl ner=new
+		 SomidiaNERImpl(); Sentence NamedEntities=ner.execute(new
+		 Sentence(tweet)); System.out.println(NamedEntities);
+		 postNER2.add(NamedEntities); }
+		 
 	}
 }

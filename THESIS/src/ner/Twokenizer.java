@@ -68,9 +68,15 @@ public class Twokenizer {
 	private static Pattern Whitespace = Pattern.compile("\\s+");
 	
 	//magnitude or signal + number
-	private static String magnitude = "\\s*((\\d)|(\\d.\\d))*\\s[Mm]agnitude\\s((\\d.\\d)|(\\d))*";
-	private static String signal = "[sS]ignal\\s(([nN]o.)|[#])\\s*\\d";
-	private static String typhoonName = "[Bb]agyong\\s((#\\S+)|([Aa-zZ]+))";
+	private static String magnitude = "\\s*((\\d)|(\\d.\\d))*\\s(([Mm]agnitude)|([Mm]ag))\\s((\\d.\\d)|(\\d))*";
+	private static String signal = "[Ss]ignal\\s(([nN]o(.)*)|#)(\\s)*\\d";
+	private static String typhoonName = "(#)*(B|b)agyong\\s((#([A-Za-z])+)|([Aa-zZ]+))";
+	
+	private static String hash = "#([A-Za-z])+";
+	
+	private static String numDead = "\\d+\\s([a-z]*\\s)*(namatay|patay|nasawi)";
+	private static String numInjured = "\\d+\\s([a-z]*\\s)*(sugatan)";
+	private static String numLost = "\\d+\\s([a-z]*\\s)*(nawawala)";
 	
 	private static String punctChars = "['“\\\".?!,:;]";
 	private static String punctSeq = punctChars + "+";
@@ -132,8 +138,12 @@ public class Twokenizer {
 	private static Pattern Protected = Pattern.compile(
 			"(" + emoticon + "|"  
 				+ magnitude + "|"
-				+ signal + "|"
+				+ numDead + "|"
+				+ numInjured + "|"
+				+ numLost + "|"
 				+ typhoonName + "|"
+				+ signal + "|"
+				+ hash + "|"
 				+ url + "|" 
 				+ entity + "|"
 				+ properNamesSpecial + "|" 
@@ -321,7 +331,7 @@ public class Twokenizer {
 
 	public static void main(String[] args) throws IOException {
 		Twokenizer twokenizer = new Twokenizer();
-		File folder = new File("ModelAndTrain/training/Earthquake");
+		File folder = new File("ModelAndTrain/training/Typhoon");
 		// Read user input
 		for (File file : folder.listFiles(new FilenameFilter() {
 			public boolean accept(File file, String fileName) {

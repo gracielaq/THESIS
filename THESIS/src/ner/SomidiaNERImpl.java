@@ -3,14 +3,16 @@ package ner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import support.model.Sentence;
 import support.model.Token;
 
 /**
  * Uses SOMIDIA's gazetteer to implement the NER
+ * 
  * @author Vilson
- *
+ * 
  */
 public class SomidiaNERImpl implements NERInterface {
 
@@ -36,14 +38,17 @@ public class SomidiaNERImpl implements NERInterface {
 					category = "disaster";
 				} else if (line.contains("LOCATION")) {
 					category = "location";
-				} else if(line.contains("MONTH")){
+				} else if (line.contains("MONTH")) {
 					category = "month";
-				} else if(line.contains("DAY")){
+				} else if (line.contains("DAY")) {
 					category = "day";
-				} 
-				else if (token.getWord().equalsIgnoreCase(line.toString())) {
+				} else if (token.getWord().equalsIgnoreCase(line.toString())) {
 					token.setNERTag(category);
 					tweet.replaceToken(i, token);
+				}else if(Pattern.matches("[Bb]agyong\\s((#\\S+)|([Aa-zZ]+))",token.getWord())){
+					token.setNERTag("TYPHOON-NAME");
+					tweet.replaceToken(i, token);
+					break;
 				}
 			}
 
