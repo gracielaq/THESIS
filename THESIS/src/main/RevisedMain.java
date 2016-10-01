@@ -5,7 +5,6 @@ import Classifier.SVM.Train;
 import liblinear.InvalidInputDataException;
 import ner.SomidiaNERImpl;
 import ner.Twokenizer;
-import lib.*;
 import preprocess.csv.CSVPreProcess;
 import support.model.Sentence;
 import support.model.Token;
@@ -26,6 +25,7 @@ public class RevisedMain {
 	public static void main(String args[]) {
 		CSVPreProcess.createTestFiles(new File(testSetCSV));
 		CSVPreProcess.createTrainingFile(new File(trainingSetCSV));
+
 
 		/*
 		 * SVM CLASSIFIER To add more classes, go to ModelAndTrain and add in
@@ -74,6 +74,13 @@ public class RevisedMain {
 
 			writer.writeAll(allData);
 			writer.close();
+
+
+            //DITO KO ILALAGAY GQ AH -JUDE
+            CSVPreProcess.createWekaFile(new File("train.txt"),new File("wekatrain.arff"));
+            CSVPreProcess.createWekaFile(new File("test.txt"),new File("wekatest.arff"));
+
+
 
 			System.out.println("Finished writing Weka DataSet - " + csv);
 		} catch (IOException e1) {

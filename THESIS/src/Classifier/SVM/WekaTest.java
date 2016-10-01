@@ -60,16 +60,23 @@ public class WekaTest {
 	}
 	//MAIN 
 	public static void main(String[] args) throws Exception {
-		BufferedReader datafile = readDataFile("weather.txt");
- 
-		Instances data = new Instances(datafile);
-		data.setClassIndex(data.numAttributes() - 1);
+		BufferedReader trainFile = readDataFile("testWekaFile.arff");
+
+		BufferedReader testfile = readDataFile("testWekaFile1.arff");
+
+		Instances train = new Instances(trainFile);
+		Instances data = new Instances(testfile);
+
+		data.setClassIndex(0);
+		train.setClassIndex(0);
  
 		// Do 10-split cross validation
+		Instances[][] splitsfortrain = crossValidationSplit(train,10);
 		Instances[][] split = crossValidationSplit(data, 10);
+
  
 		// Separate split into training and testing arrays
-		Instances[] trainingSplits = split[0];
+		Instances[] trainingSplits = splitsfortrain[0];
 		Instances[] testingSplits = split[1];
  
 		// Use a set of classifiers
@@ -92,7 +99,7 @@ public class WekaTest {
 				predictions.appendElements(validation.predictions());
  
 				// Uncomment to see the summary for each training-testing pair.
-				//System.out.println(models[j].toString());
+				System.out.println(models[j].toString());
 			}
  
 			// Calculate overall accuracy of current classifier on all splits

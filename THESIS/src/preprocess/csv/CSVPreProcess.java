@@ -1,10 +1,10 @@
 package preprocess.csv;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import au.com.bytecode.opencsv.CSVReader;
 
@@ -26,8 +26,7 @@ public class CSVPreProcess {
         return myEntries;
     }
     public static void main(String args[]){
-        createTrainingFile(new File("TrainingSet.csv"));
-        createTestFiles(new File("Data Sheet.csv"));
+        createWekaFile(new File("test.txt"));
     }
 
     public static void createTestFiles(File testCSVFile){
@@ -66,6 +65,78 @@ public class CSVPreProcess {
                 e.printStackTrace();
             }
         }
+    }
+
+
+
+    public static void createWekaFile(File testFile, File outputFile){
+        //File outputFile = new File("testWekaFile1.arff");
+        try {
+            FileWriter fileWriter = new FileWriter(outputFile, false);
+
+            fileWriter.append("@relation DISASTER\n\n")
+                    .append("@attribute category {0,1,2}\n");
+            int numberOfUniqueWords = getNumberOfUniqueWords();
+            for(int x=1;x<numberOfUniqueWords;x++){
+                fileWriter.append("@attribute word").append(x+" {TRUE,FALSE}\n");
+            }
+            fileWriter.append("\n@data\n");
+
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(testFile));
+            String line;
+            while((line=bufferedReader.readLine())!=null){
+                Map<Integer, Integer> map = getMap(line);
+
+                fileWriter.append(""+map.get(0));
+                for (int index = 1; index < numberOfUniqueWords; index++) {
+                    fileWriter.append(",");
+                    if(map.containsKey(index)){
+                        fileWriter.append("TRUE");
+                    }else{
+                        fileWriter.append("FALSE");
+                    }
+                }
+                fileWriter.append("\n");
+            }
+
+
+            fileWriter.close();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static int getNumberOfUniqueWords(){
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("unique_words.txt"));
+            return bufferedReader.readLine().split(",").length;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return 0;
+        }
+
+    }
+
+    public static Map<Integer, Integer> getMap(String line){
+        String[] data = line.split(" ");
+
+        Map<Integer,Integer> map = new HashMap<>();
+        map.put(0,Integer.parseInt(data[0]));
+
+        //skip the first element kasi yun yung category
+        for (int index = 1; index < data.length; index++) {
+            String[] keyAndValue = data[index].split(":");
+            map.put(Integer.parseInt(keyAndValue[0]),(int)(Math.round(Double.parseDouble(keyAndValue[1]))));
+        }
+
+        return map;
+
     }
 
 
