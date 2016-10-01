@@ -1,0 +1,23 @@
+@relation DRRM
+
+@attribute category {typhoon, flood, earthquake}
+@attribute temperature numeric
+@attribute humidity numeric
+@attribute windy {TRUE,FALSE}
+@attribute play {yes,no}
+
+@data
+typhoon,85,85,FALSE,no
+typhoon,80,90,TRUE,no
+earthquake,83,86,FALSE,yes
+flood,70,96,FALSE,yes
+flood,68,80,FALSE,yes
+flood,65,70,TRUE,no
+earthquake,64,65,TRUE,yes
+typhoon,72,95,FALSE,no
+typhoon,69,70,FALSE,yes
+flood,75,80,FALSE,yes
+typhoon,75,70,TRUE,yes
+earthquake,72,90,TRUE,yes
+earthquake,81,75,FALSE,yes
+flood,71,91,TRUE,no
