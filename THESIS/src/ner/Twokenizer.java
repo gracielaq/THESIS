@@ -39,19 +39,15 @@ package ner;
  * July 2011
  */
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
-import java.util.logging.Filter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -66,13 +62,14 @@ public class Twokenizer {
 	
 	private static Pattern Contractions = Pattern.compile("(?i)^(\\w+)(n't|'ve|'ll|'d|'re|'s|'m)$");
 	private static Pattern Whitespace = Pattern.compile("\\s+");
+
+	private static String hash = "#([A-Za-z])+";
 	
 	//magnitude or signal + number
 	private static String magnitude = "\\s*((\\d)|(\\d.\\d))*\\s(([Mm]agnitude)|([Mm]ag))\\s((\\d.\\d)|(\\d))*";
-	private static String signal = "[Ss]ignal\\s(([nN]o(.)*)|#)(\\s)*\\d";
-	private static String typhoonName = "(#)*(B|b)agyong\\s((#([A-Za-z])+)|([Aa-zZ]+))";
+	private static String signal = "([Ss]ignal)\\s((#(\\s)*\\d)|([Nn]o(.)*\\d))";
+	private static String typhoonName = "(#)*(B|b)agyong\\s(([A-Za-z]+)|" + hash + ")";
 	
-	private static String hash = "#([A-Za-z])+";
 	
 	private static String numDead = "\\d+\\s([a-z]*\\s)*(namatay|patay|nasawi)";
 	private static String numInjured = "\\d+\\s([a-z]*\\s)*(sugatan)";
@@ -92,9 +89,10 @@ public class Twokenizer {
 	private static String url = "\\b(" + urlStart1 + "|" + urlStart2 + ")" + urlBody + "(?=(" + urlExtraCrapBeforeEnd
 			+ ")?" + urlEnd + ")";
 
-	private static String properNames = "(?:(\\s[A-Z]([A-Z]|[a-z])+))+|[A-Za-z]+";
-	private static String properNamesSpecial = "(?:((\\sde|\\sdel)*(,)*\\s[A-Z]([A-Z]|[a-z])+))+|[A-Za-z]+";
-
+	private static String properNames = "(\\s[A-Z][a-z]+(\\sde|\\sdel|\\sof)*)+";
+	//private static String properNamesOld = "(((\\s[A-Z]([A-Z]|[a-z])+))+|[A-Za-z]+)";
+	private static String properNameSta = "Sta.\\s[A-Z][a-z]+";
+	
 	// Numeric
 	private static String timeLike = "\\d+:\\d+\\s*[A|a|P|p][M|m]";
 	private static String numNum = "\\d+\\.\\d+";
@@ -136,18 +134,18 @@ public class Twokenizer {
 
 	// Delimiters
 	private static Pattern Protected = Pattern.compile(
-			"(" + emoticon + "|"  
+			"(" + typhoonName + "|"
+				+ emoticon + "|"  
 				+ magnitude + "|"
 				+ numDead + "|"
 				+ numInjured + "|"
 				+ numLost + "|"
-				+ typhoonName + "|"
 				+ signal + "|"
-				+ hash + "|"
 				+ url + "|" 
 				+ entity + "|"
-				+ properNamesSpecial + "|" 
+				//+ properNamesSpecial + "|" 
 				+ properNames + "|"
+				+ properNameSta + "|"
 				+ timeLike + "|" 
 				+ numNum + "|" 
 				+ numberWithCommas + "|"
@@ -171,7 +169,12 @@ public class Twokenizer {
 		Matcher whitespaceMatcher = Whitespace.matcher(input);
 		return whitespaceMatcher.replaceAll(" ").trim();
 	}
-
+	
+	//remove hashtags
+	public String removeHash(String input) {
+		return input.replace("#","");
+	}
+	
 	// For special patterns
 	public Vector<String> splitToken(String token) {
 		Matcher contractionsMatcher = Contractions.matcher(token);
@@ -292,7 +295,6 @@ public class Twokenizer {
 		
 		ArrayList<ArrayList<String>> tweets = new ArrayList<>();
 		
-		ArrayList<String> tokens = new ArrayList<String>();
 		Twokenizer twokenizer = new Twokenizer();
 		for (File file : folder.listFiles(new FilenameFilter() {
 			public boolean accept(File file, String fileName) {
