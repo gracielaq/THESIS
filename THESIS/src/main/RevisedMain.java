@@ -52,9 +52,9 @@ public class RevisedMain {
 		}
 		// convert unique_words.txt to csv headers
 		/* CONVERT TO WEKA RESOURCES */
-		try {
+	/*	try {
 			// read unique_words.txt
-			BufferedReader br = new BufferedReader(new FileReader(
+			/*BufferedReader br = new BufferedReader(new FileReader(
 					"unique_words.txt"));
 
 			String words = br.readLine();
@@ -73,20 +73,17 @@ public class RevisedMain {
 			}
 
 			writer.writeAll(allData);
-			writer.close();
+			writer.close();*/
 
 
             //DITO KO ILALAGAY GQ AH -JUDE
             CSVPreProcess.createWekaFile(new File("train.txt"),new File("wekatrain.arff"));
             CSVPreProcess.createWekaFile(new File("test.txt"),new File("wekatest.arff"));
 
-
-
-			System.out.println("Finished writing Weka DataSet - " + csv);
-		} catch (IOException e1) {
+		/*} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		}*/
 		// Start NER
 		// start twokenizer
 		// Typhoon

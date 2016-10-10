@@ -25,9 +25,7 @@ public class CSVPreProcess {
         }
         return myEntries;
     }
-    public static void main(String args[]){
-        createWekaFile(new File("test.txt"));
-    }
+  
 
     public static void createTestFiles(File testCSVFile){
         String testFilePath="ModelAndTrain/dev";
