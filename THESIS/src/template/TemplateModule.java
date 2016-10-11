@@ -1,5 +1,7 @@
 package template;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import support.model.Sentence;
 import support.model.Token;
@@ -11,16 +13,23 @@ public class TemplateModule {
 	public static void main(String args[]){
 		ArrayList<Token> testTokens = new ArrayList<Token>();
 		Token token = new Token();
-		token.setWord("BAHAY NI JUDE");
+		token.setWord("ANTIPOLO");
 		token.setNERTag(tempBean.LOCATION_TAG);
+		Token token2= new Token(); 
+		token2.setWord("ABRIL 29");
+		token2.setNERTag(tempBean.PETSA_TAG);
 		
 		testTokens.add(token);
-		
+		testTokens.add(token2);
+	
 		tempBean temp = tempBean.createTempBean(testTokens);
 		
-		String result = Typhoon(temp);
+		String result = Earthquake(temp);
 		System.out.println(result);
 		
+		createEarthquakeFile(result);
+		//createTyphoonFile(result);
+		//createFloodFile(result);
 	}
 	
 	//Typhoon Template
@@ -132,6 +141,58 @@ public static ArrayList<Token> processSentence(Sentence sentence){
 	return tokenList;
 
 }
+
+static int counterEarthquake = 0;
+public static void createEarthquakeFile(String news){
+	File file = new File("EarthquakeNewsReport");
+	file.mkdir();
+	File textFile = new File(file.getPath()+File.separator+"Earthquake News Report"+ (++counterEarthquake)+".txt");
+	try{
+	FileWriter fw = new FileWriter(textFile);
+	fw.append(news);
+	fw.close();
+	System.out.println("FILE CREATED"+textFile.getName());
+	}catch(Exception e){
+		System.out.println("ERROR IN CREATING TEXTFILE");
+		e.printStackTrace();
+	}
+}
+
+static int counterTyphoon = 0;
+public static void createTyphoonFile(String news){
+	
+	
+	File file = new File("TyphoonNewsReport");
+	file.mkdir();
+	File textFile = new File(file.getPath()+File.separator+"Typhoon News Report"+ (++counterTyphoon)+".txt");
+	try{
+	FileWriter fw = new FileWriter(textFile);
+	fw.append(news);
+	fw.close();
+	System.out.println("FILE CREATED: "+textFile.getName());
+	}catch(Exception e){
+		System.out.println("ERROR IN CREATING TEXTFILE");
+		e.printStackTrace();
+	}
+}
+
+static int counterFlood = 0;
+public static void createFloodFile(String news){
+	File file = new File("FloodNewsReport");
+	file.mkdir();
+	File textFile = new File(file.getPath()+File.separator+"Flood News Report"+ (++counterFlood)+".txt");
+	try{
+	FileWriter fw = new FileWriter(textFile);
+	fw.append(news);
+	fw.close();
+	System.out.println("FILE CREATED"+textFile.getName());
+	}catch(Exception e){
+		System.out.println("ERROR IN CREATING TEXTFILE");
+		e.printStackTrace();
+	}
+}
+
+
 
 
 

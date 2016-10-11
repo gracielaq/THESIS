@@ -15,6 +15,7 @@ public class tempBean {
 	private String kmph;
 	private String petsa;
 	private String magnitude;
+	private String signal;
 	private String intensity;
 	private String bilangNgAfterShocks;
 	private String bilangNgNaapektuhan;
@@ -28,12 +29,13 @@ public class tempBean {
 	final static String NUMBER_OF_DEATHS_TAG="NUMOFDEATHS";
 	final static String NUMBER_OF_INJURIES ="NUMOFINJURIES";
 	final static String NUMBER_OF_MISSING ="NUMOFMISSING";
-	final static String TYPHOON_NAME_TAG = "TYPHOONNAME";
+	final static String TYPHOON_NAME_TAG = "TYPHOON-NAME";
 	final static String LOCATION_TAG="LOCATION";
 	final static String MONEY_TAG="MONEY";
 	final static String KMPH_TAG="KMPH";
 	final static String PETSA_TAG="PETSA";
 	final static String MAGNITUDE_TAG="MAGNITUDE";
+	final static String SIGNAL_TAG="SIGNAL";
 	final static String INTENSITY_TAG="INTENSITY";
 	final static String NUMBER_OF_AFTERSHOCKS_TAG="NUMOFAFTERSHOCKS";
 	final static String NUMBER_OF_NAAPEKTUHAN_TAG ="NUMOFAFFECTED";
@@ -81,6 +83,9 @@ public class tempBean {
 					break;
 				case MAGNITUDE_TAG:
 					templateBean.setMagnitude(token.getWord());
+					break;
+				case SIGNAL_TAG:
+					templateBean.setSignal(token.getWord());
 					break;
 				case INTENSITY_TAG:
 					templateBean.setIntensity(token.getWord());
@@ -157,6 +162,12 @@ public class tempBean {
 	}
 	public void setMagnitude(String magnitude) {
 		this.magnitude = magnitude;
+	}
+	public String getSignal() {
+		return signal;
+	}
+	public void setSignal(String signal) {
+		this.signal = signal;
 	}
 	public String getIntensity() {
 		return intensity;

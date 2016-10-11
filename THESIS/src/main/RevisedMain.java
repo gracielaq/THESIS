@@ -9,6 +9,7 @@ import preprocess.csv.CSVPreProcess;
 import support.model.Sentence;
 import support.model.Token;
 import template.TemplateModule;
+import template.tempBean;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -50,42 +51,11 @@ public class RevisedMain {
 		} catch (IOException | InvalidInputDataException e) {
 			e.printStackTrace();
 		}
-		// convert unique_words.txt to csv headers
-		/* CONVERT TO WEKA RESOURCES */
-	/*	try {
-			// read unique_words.txt
-			/*BufferedReader br = new BufferedReader(new FileReader(
-					"unique_words.txt"));
-
-			String words = br.readLine();
-
-			String csv = "./WekaResources/DataSet.csv";
-			au.com.bytecode.opencsv.CSVWriter writer = new au.com.bytecode.opencsv.CSVWriter(
-					new FileWriter(csv));
-
-			String[] header = words.split(",");
-			writer.writeNext(header);
-			List<String[]> allData = new ArrayList<String[]>();
-			for (int i = 0; i < 3; i++) {
-				String[] data = new String[] { "Blogger" + i, "20" + i,
-						"20.0002", i + " World Wide Web" };
-				allData.add(data);
-			}
-
-			writer.writeAll(allData);
-			writer.close();*/
-
-
-            //DITO KO ILALAGAY GQ AH -JUDE
-            CSVPreProcess.createWekaFile(new File("train.txt"),new File("wekatrain.arff"));
-            CSVPreProcess.createWekaFile(new File("test.txt"),new File("wekatest.arff"));
-
-		/*} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
-		// Start NER
-		// start twokenizer
+        //CHANGE TO WEKA RESOURCES 
+        CSVPreProcess.createWekaFile(new File("train.txt"),new File("wekatrain.arff"));
+        CSVPreProcess.createWekaFile(new File("test.txt"),new File("wekatest.arff"));
+		
+        // Start NER
 		// Typhoon
 		ArrayList<ArrayList<String>> preNER = Twokenizer.tokenizeFile(new File(
 				"ModelAndTrain/training/Typhoon"));
@@ -94,8 +64,7 @@ public class RevisedMain {
 		for (ArrayList<String> tweet : preNER) {
 			SomidiaNERImpl ner = new SomidiaNERImpl();
 			Sentence NamedEntities = ner.execute(new Sentence(tweet));
-			System.out
-					.println("TWEET CATEGORY: " + NamedEntities.getCategory());
+			
 			System.out.println(NamedEntities);
 			postNER.add(NamedEntities);
 
@@ -105,19 +74,61 @@ public class RevisedMain {
 				System.out.print("\n");
 			}
 			
+			tempBean temp = tempBean.createTempBean(tokenList);
+			
+			String news = TemplateModule.Typhoon(temp);
+			System.out.println("NEWS:   "+news);
+			
+			TemplateModule.createTyphoonFile(news);
 
 		}
-
+		/*
 		// Earthquake
 		 ArrayList<ArrayList<String>> preNER2=Twokenizer.tokenizeFile(new
 		 File("ModelAndTrain/training/Earthquake"));
 		  
 		  
 		 ArrayList<Sentence> postNER2 = new ArrayList<>();
-		 for(ArrayList<String> tweet:preNER2){ SomidiaNERImpl ner=new
-		 SomidiaNERImpl(); Sentence NamedEntities=ner.execute(new
-		 Sentence(tweet)); System.out.println(NamedEntities);
-		 postNER2.add(NamedEntities); }
 		 
+		 for(ArrayList<String> tweet:preNER2){ 
+		 
+		 	SomidiaNERImpl ner2=new SomidiaNERImpl(); 
+		 
+		 	Sentence NamedEntities=ner2.execute(new Sentence(tweet)); 
+		 
+		 	System.out.println(NamedEntities);
+		 
+		 	postNER2.add(NamedEntities); 
+		 
+		 }
+		
+		//Flood
+		ArrayList<ArrayList<String>> preNER3 = Twokenizer.tokenizeFile(new File(
+				"ModelAndTrain/training/Flood"));
+
+		ArrayList<Sentence> postNER3 = new ArrayList<>();
+		for (ArrayList<String> tweet : preNER3) {
+			SomidiaNERImpl ner3 = new SomidiaNERImpl();
+			Sentence NamedEntities = ner3.execute(new Sentence(tweet));
+			
+			System.out.println(NamedEntities);
+			postNER3.add(NamedEntities);
+
+			ArrayList<Token> tokenList3 = TemplateModule.processSentence(NamedEntities);
+			for(Token token :tokenList3){
+				token.PrintToken();
+				System.out.print("\n");
+			}
+			
+			tempBean temp3 = tempBean.createTempBean(tokenList3);
+			
+			String news3 = TemplateModule.Flood(temp3);
+			System.out.println("NEWS:   "+news3);
+			
+			TemplateModule.createFloodFile(news3);
+
+		}
+		  *
+		 */
 	}
 }

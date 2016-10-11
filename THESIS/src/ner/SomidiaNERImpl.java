@@ -45,8 +45,39 @@ public class SomidiaNERImpl implements NERInterface {
 				} else if (token.getWord().equalsIgnoreCase(line.toString())) {
 					token.setNERTag(category);
 					tweet.replaceToken(i, token);
-				}else if(Pattern.matches("[Bb]agyong\\s((#\\S+)|([Aa-zZ]+))",token.getWord())){
+				}else if(Pattern.matches("\\d+\\s([a-z]*\\s)*(namatay|patay|nasawi)"
+						,token.getWord())){
+					token.setNERTag("NUMOFDEATHS");
+					tweet.replaceToken(i, token);
+					break;
+				}else if(Pattern.matches("\\d+\\s([a-z]*\\s)*(sugatan)"
+						,token.getWord())){
+					token.setNERTag("NUMOFINJURIES");
+					tweet.replaceToken(i, token);
+					break;
+				}else if(Pattern.matches("\\d+\\s([a-z]*\\s)*(nawawala)"
+						,token.getWord())){
+					token.setNERTag("NUMOFMISSING");
+					tweet.replaceToken(i, token);
+					break;
+				}else if(Pattern.matches("(#)*(((B|b)agyong)|(T|t)yphoon)(\\s#*(P|p)apangalanang)*\\s'*(([A-Za-z]+'*)|('*#([A-Za-z])+'*))"
+						,token.getWord())){
 					token.setNERTag("TYPHOON-NAME");
+					tweet.replaceToken(i, token);
+					break;
+				}else if(Pattern.matches("\\s*((\\d)|(\\d.\\d))*\\s(([Mm]agnitude)|([Mm]ag))\\s((\\d.\\d)|(\\d))*"
+						,token.getWord())){
+					token.setNERTag("MAGNITUDE");
+					tweet.replaceToken(i, token);
+					break;
+				}else if(Pattern.matches("(\\b[Ss]ignal)\\s((#(\\s)*\\d)|([Nn]o(.)*\\d))"
+						,token.getWord())){
+					token.setNERTag("SIGNAL");
+					tweet.replaceToken(i, token);
+					break;
+				}else if(Pattern.matches("(([Mm]ar(ch)*)|(Marso))\\s\\d{1,2},\\s(\\d{4}|\\d{2})"
+						,token.getWord())){
+					token.setNERTag("PETSA");
 					tweet.replaceToken(i, token);
 					break;
 				}

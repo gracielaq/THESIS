@@ -2,6 +2,7 @@ package preprocess.csv;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,23 +50,22 @@ public class CSVPreProcess {
     public static void createTrainingFile(File trainingCSVFile){
         String trainingFilePath="ModelAndTrain/training";
         List<String[]> trainingList = processCSV(trainingCSVFile);
-
+        
         //skip the first line
         for (int currentRow = 1; currentRow <trainingList.size() ; currentRow++) {
             String category = trainingList.get(currentRow)[1];
             File file = new File(trainingFilePath+"/"+category+"/"+(++trainid)+".txt");
             try {
                 FileWriter fileWriter = new FileWriter(file);
-                fileWriter.append("USER:").append(trainingList.get(currentRow)[0]).append(" ");
+                fileWriter.append("USER:").append(trainingList.get(currentRow)[0]).append("TIME: ").append(trainingList.get(currentRow)[3]).append(" ");
                 fileWriter.append(trainingList.get(currentRow)[2]);
+
                 fileWriter.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-
-
 
     public static void createWekaFile(File testFile, File outputFile){
         //File outputFile = new File("testWekaFile1.arff");
@@ -136,8 +136,5 @@ public class CSVPreProcess {
         return map;
 
     }
-
-
-
 
 }
