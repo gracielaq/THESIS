@@ -4,11 +4,11 @@ package liblinear;
 interface Function
 {
 
-	double fun( double[] w );
+	double fun(double[] w);
 
 	int get_nr_variable();
 
-	void grad( double[] w, double[] g );
+	void grad(double[] w, double[] g);
 
-	void Hv( double[] s, double[] Hs );
+	void Hv(double[] s, double[] Hs);
 }

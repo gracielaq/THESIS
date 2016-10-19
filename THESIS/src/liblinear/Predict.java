@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 public class Predict
 {
-
+	public static String accuracy;
 	/**
 	 * <p>
 	 * <b>Note: The streams are NOT closed</b>

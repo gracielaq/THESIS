@@ -1,18 +1,3 @@
-<Category>: UNIT
-residente
-pamilya
-tao
-sack
-sako
-evacuee
-evacuees
-katao
-casualty
-patay
-bahay
-volunteer
-volunteers
-food
 <Category>: LOCATION
 oriental mindoro
 Abalos
@@ -643,7 +628,6 @@ arangga
 araro
 araullo
 araullo high school
-araw
 arayat
 arbor avenue
 arcadia avenue
@@ -1122,6 +1106,7 @@ bencer
 benedictine
 benefits
 benfran loop
+benguet
 benigno "ninoy" aquino high school
 benigno aquino sr.
 benigno toda jr.
@@ -2551,7 +2536,6 @@ diosdado macapagal bridge
 diosdado macapagal interchange
 dita
 ditchoy
-dito
 dividends
 divine
 divine light academy
@@ -7156,6 +7140,7 @@ quercos
 querubin circle
 quesada
 quezon
+quezon city
 quezon avenue
 quezon avenue bridge
 quezon boulevard
@@ -7298,7 +7283,6 @@ recoletos
 recoletos circle
 recto
 recto st.
-red
 red annie
 red arrow
 red cedar
@@ -9545,6 +9529,7 @@ zalameda
 zambales
 zambia
 zamboanga
+zamboanga del norte
 zamora
 zamora circle
 zamora school
@@ -9584,174 +9569,3 @@ zulueta
 zulueta circle
 zurich
 cuyo island
-<Category>: DAY
-Monday
-Mon
-Tuesday
-Tues
-Wednesday
-Wed
-Thursday
-Thurs
-Friday
-Fri
-Saturday
-Sat
-Sunday
-Sun
-Lunes
-Martes
-Miyerkules
-Huwebes
-Biyernes
-Sabado 
-Linggo<Category>: DISASTER
-ulan
-nasusunog
-baha
-bagyo
-lindol
-lumilindol
-sunog
-apoy
-flood
-heavy rains
-typhoon
-storm
-fire
-earthquake
-flashfloods
-flooded
-flooding
-tubig-baha
-nbaha
-flash flood
-raining
-flood
-flashfloods
-floods
-flooded
-fire
-blaze
-charring
-combustion
-conflagration
-devouring
-embers
-smoke
-flames
-flare
-heat
-incandescence
-inferno
-phlogiston
-pyre
-scorching
-sunog
-nasusunog
-sinusunog
-apoy
-umaapoy
-inaapoy
-maapoy
-storm
-typhoon
-cyclone
-downpour
-gale
-gust
-hurricane
-monsoon
-precip
-precipitation
-tempest
-windstorm
-cloudburst
-drencher
-drizzle
-flurry
-rainfall
-rainstorm
-sleet
-spate
-spit
-torrent
-volley
-bagyo
-binabagyo
-bumabagyo
-ulan
-ulanan
-umuulan
-inuulan
-inuulanan
-maulan
-mabagyo
-baha
-bumabaha
-mabaha
-binabaha
-earthquake
-macroseism
-microseism
-quake
-quaker
-seimicity
-seism
-seismism
-temblor
-trembler
-undulation
-upheaval
-lindol
-nilindol
-lumilindol
-malindol
-landslide
-earthfall
-mudslide
-rockslide
-moderate to heavy rainfall
-umuuln
-moderate-heavy rains
-pagbaha
-lakas ng ulan
-inclement weather
-heavy rains
-binaha
-rains
-thunderstoms
-downpour/flood
-rain showers
-thunderstorm
-strong rain
-heavy tain
-hard rain
-nagksunog
-bahaing
-floodway
-moderate to heavy rains
-umulan
-binahang
-unyielding rain
-overflowed creek
-pag-ulan
-wildfire
-rainy
-bad weather
-heavy rain
-bahang
-raining hard
-malakas ang ulan
-floodings
-rain
-rainshowers
-uulan
-bumaha
-inulan
-heavy rain fall
-ulaaaan
-maulang
-raining non stop
-masamang panahon
-non stop rain

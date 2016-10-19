@@ -20,7 +20,7 @@ public class Test
 		Classifier classifier = new Classifier();
 		classifier.buildTestFile( args[ 0 ], args[ 1 ] );
 		long end = System.currentTimeMillis();
-		System.out.println( "Time taken to build test file= " + (end - start) + " msec" );
+		//buildTestTime(end,start);
 
 		start = System.currentTimeMillis();
 		Linear.disableDebugOutput();
@@ -31,7 +31,14 @@ public class Test
 		Linear.enableDebugOutput();
 		Predict.main( param );
 		end = System.currentTimeMillis();
-		System.out.println( "Time taken to classify = " + (end - start) + " msec" );
+		//classifyTime(end,start);
 		classifier.writeResultFile();
+	}
+
+	public static String buildTestTime(long end, long start){
+		return "Time taken to build test file= " + (end - start) + " msec";
+	}
+	public static String classifyTime(long end, long start){
+		return "Time taken to classify = " + (end - start) + " msec";
 	}
 }

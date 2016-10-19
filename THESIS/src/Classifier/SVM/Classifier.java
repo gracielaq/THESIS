@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.SocketPermission;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -28,6 +29,8 @@ public class Classifier
 	final String OUTPUT_RESULT_FILE = "result.txt";
 	final String UNIQUE_FILENAME = "unique_words.txt";
 
+    public static String inst;
+
 	protected void buildTrainData( String class_filename, String training_folder ) throws IOException
 	{
 		getStopWords();
@@ -35,6 +38,7 @@ public class Classifier
 		readTrainFiles( training_folder );
 		writeTrainFile();
 		writeUniqueWords();
+
 	}
 
 	protected void buildTestFile( String test_class_filename, String testing_folder ) throws IOException
@@ -46,7 +50,7 @@ public class Classifier
 		writeTestFile();
 	}
 
-	protected void writeResultFile() throws IOException
+	public String writeResultFile() throws IOException
 	{
 		BufferedReader br = new BufferedReader( new FileReader( OUTPUT_RESULT_FILE ) );
 		String line;
@@ -67,11 +71,11 @@ public class Classifier
 		BufferedWriter bw = new BufferedWriter( fw );
 		bw.write( sb.toString() );
 		bw.close();
-
-		System.out.println( "Finished writing output result file - " + OUTPUT_RESULT_FILE );
+        System.out.println("Finished writing output result file - " + OUTPUT_RESULT_FILE);
+		return "Finished writing output result file - " + OUTPUT_RESULT_FILE;
 	}
 
-	private void getStopWords() throws IOException
+	public String getStopWords() throws IOException
 	{
 		BufferedReader br = new BufferedReader( new FileReader( STOPWORD_FILENAME ) );
 		String line;
@@ -82,8 +86,9 @@ public class Classifier
 			for ( String token : tokens )
 				stopwords.add( token );
 		}
-		System.out.println( "Finished reading stopwords." );
 		br.close();
+        System.out.println("Finished reading stopwords.");
+		return "Finished reading stopwords.";
 	}
 
 	private void getUniqueWords() throws IOException
@@ -100,22 +105,24 @@ public class Classifier
 		br.close();
 	}
 
-	private void readTestClassNames( String test_class_filename ) throws NumberFormatException, IOException
-	{
-		BufferedReader br = new BufferedReader( new FileReader( test_class_filename ) );
-		String line;
+    private void readTestClassNames( String test_class_filename ) throws NumberFormatException, IOException
+    {
+        BufferedReader br = new BufferedReader( new FileReader( test_class_filename ) );
+        String line;
 
-		while ( (line = br.readLine()) != null )
-		{
-			String[] tokens = line.split( "\\s+" ); // Split words by space
-			if ( tokens != null && tokens.length > 0 )
-				testClassNameMap.put( tokens[ 0 ], Integer.parseInt( tokens[ 1 ] ) );
-		}
-		System.out.println( "Found " + testClassNameMap.size() + " test instances" );
-		br.close();
-	}
+        while ( (line = br.readLine()) != null )
+        {
+            String[] tokens = line.split( "\\s+" ); // Split words by space
+            if ( tokens != null && tokens.length > 0 )
+                testClassNameMap.put( tokens[ 0 ], Integer.parseInt( tokens[ 1 ] ) );
+        }
+        inst="Found " + testClassNameMap.size() + " test instances";
+        System.out.println( "Found " + testClassNameMap.size() + " test instances" );
 
-	private void readClassNames( String class_filename ) throws IOException
+        br.close();
+    }
+
+	private String readClassNames( String class_filename ) throws IOException
 	{
 		BufferedReader br = new BufferedReader( new FileReader( class_filename ) );
 		String line;
@@ -126,12 +133,12 @@ public class Classifier
 			if ( tokens != null && tokens.length > 0 )
 				classNameMap.put( Integer.parseInt( tokens[ 0 ] ), tokens[ 1 ] );
 		}
-		System.out.println( "Found " + classNameMap.size() + " classes" );
-		br.close();
+        br.close();
+		return "Found " + classNameMap.size() + " classes";
 	}
 
 
-	private void readTestFiles( String testing_folder ) throws NumberFormatException, IOException
+	private String readTestFiles( String testing_folder ) throws NumberFormatException, IOException
 	{
 		System.out.println( "Started reading test files" );
 		Stemmer stemmer = new Stemmer();
@@ -167,17 +174,18 @@ public class Classifier
 			testDataList.add( trainData );
 			in.close();
 		}
-		System.out.println( "Finished reading test files" );
+		return  "Finished reading test files";
 	}
 
 
-	private void readTrainFiles( String training_folder ) throws NumberFormatException, IOException
+	private String readTrainFiles( String training_folder ) throws NumberFormatException, IOException
 	{
 		System.out.println( "Started reading class folder" );
 		Stemmer stemmer = new Stemmer();
+        String classFolderName ="";
 		for ( Map.Entry< Integer, String > entry : classNameMap.entrySet() )
 		{
-			String classFolderName = entry.getValue();
+			classFolderName = entry.getValue();
 			File classFolder = new File( training_folder, classFolderName );
 			File[] listofFiles = classFolder.listFiles();
 
@@ -211,11 +219,11 @@ public class Classifier
 				trainDataList.add( trainData );
 				in.close();
 			}
-			System.out.println( "Finished reading folder " + classFolderName );
 		}
+        return "Finished reading folder " + classFolderName;
 	}
 
-	private void writeTrainFile() throws IOException
+	private String writeTrainFile() throws IOException
 	{
 		File file = new File( OUTPUT_TRAIN_FILE );
 		file.createNewFile();
@@ -233,11 +241,11 @@ public class Classifier
 
 			bw.write( "\n" );
 		}
-		System.out.println( "Finished writing training file - " + OUTPUT_TRAIN_FILE );
-		bw.close();
+        bw.close();
+		return "Finished writing training file - " + OUTPUT_TRAIN_FILE;
 	}
 
-	private void writeTestFile() throws IOException
+	private String writeTestFile() throws IOException
 	{
 		File file = new File( OUTPUT_TEST_FILE );
 		file.createNewFile();
@@ -254,11 +262,11 @@ public class Classifier
 
 			bw.write( "\n" );
 		}
-		System.out.println( "Finished writing test file - " + OUTPUT_TEST_FILE );
-		bw.close();
+        bw.close();
+		return "Finished writing test file - " + OUTPUT_TEST_FILE ;
 	}
 
-	private void writeUniqueWords() throws IOException
+	private String writeUniqueWords() throws IOException
 	{
 		File file = new File( UNIQUE_FILENAME );
 		file.createNewFile();
@@ -269,8 +277,8 @@ public class Classifier
 		for ( String words : uniqueWords )
 			bw.write( words + "," );
 
-		System.out.println( "Finished writing unique words file - " + UNIQUE_FILENAME );
-		bw.close();
+        bw.close();
+		return "Finished writing unique words file - " + UNIQUE_FILENAME ;
 	}
 
 	private int getIndex( String word )

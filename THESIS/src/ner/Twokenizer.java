@@ -66,7 +66,7 @@ public class Twokenizer {
 	private static String hash = "('*#([A-Za-z])+'*)";
 	
 	//magnitude or signal + number
-	private static String magnitude = "\\s*((\\d)|(\\d.\\d))*\\s(([Mm]agnitude)|([Mm]ag))\\s((\\d.\\d)|(\\d))*";
+	private static String magnitude = "([Mm]ag(nitude)?\\s\\d(.\\d)?)|((\\d(.\\d)?\\s)?[Mm]ag(nitude)?)";
 	private static String signal = "(\\b[Ss]ignal)\\s((#(\\s)*\\d)|([Nn]o(.)*\\d))";
 	private static String typhoonName = "(#)*(((B|b)agyong)|(T|t)yphoon)(\\s#*(P|p)apangalanang)*\\s'*(([A-Za-z]+'*)|" + hash + ")";
 	
@@ -93,13 +93,13 @@ public class Twokenizer {
 	private static String url = "\\b(" + urlStart1 + "|" + urlStart2 + ")" + urlBody + "(?=(" + urlExtraCrapBeforeEnd
 			+ ")?" + urlEnd + ")";
 
-	private static String properNames = "(\\b[A-Z][a-z]+((\\sde|\\sdel|\\sof)*\\s[A-Z]\\S+)+)"
+	private static String properNames = "(\\b[A-Z][a-z]+((\\sde|\\sdel|\\sof)*\\s[A-Z][a-z]+)+)"
 			+ "|(Sta.\\s[A-Z][a-z]+)";
 	
 	// Numeric
-	private static String timeLike = "\\d+:\\d+\\s*[A|a|P|p][M|m]";
+	private static String timeLike = "\\d+:\\d+\\s*([A|a|P|p][M|m])*";
 	private static String numNum = "\\d+\\.\\d+";
-	//private static String numberWithCommas = "(\\d+,)+\\d+";
+	private static String numberWithCommas = "(\\d+,)+\\d+";
 
 	// 'Smart Quotes' (http://en.wikipedia.org/wiki/Smart_quotes)
 	private static String edgePunctChars = "'\\\"“”‘’<>«»{}\\(\\)\\[\\]";
@@ -138,11 +138,11 @@ public class Twokenizer {
 	// Delimiters
 	private static Pattern Protected = Pattern.compile(
 			"(" + typhoonName + "|"
-				+ emoticon + "|"  
-				+ magnitude + "|"
+				+ emoticon + "|"
 				+ numDead + "|"
 				+ numInjured + "|"
 				+ numLost + "|"
+				+ magnitude + "|"
 				+ signal + "|"
 				+ url + "|" 
 				+ entity + "|"

@@ -109,7 +109,7 @@ public class CsvReader {
 	 * @param delimiter
 	 *            The character to use as the column delimiter.
 	 * @param charset
-	 *            The {@link java.nio.charset.Charset Charset} to use while
+	 *            The {@link Charset Charset} to use while
 	 *            parsing the data.
 	 */
 	public CsvReader(String fileName, char delimiter, Charset charset)
@@ -139,7 +139,7 @@ public class CsvReader {
 	/**
 	 * Creates a {@link com.csvreader.CsvReader CsvReader} object using a file
 	 * as the data source.&nbsp;Uses ISO-8859-1 as the
-	 * {@link java.nio.charset.Charset Charset}.
+	 * {@link Charset Charset}.
 	 * 
 	 * @param fileName
 	 *            The path to the file to use as the data source.
@@ -154,7 +154,7 @@ public class CsvReader {
 	/**
 	 * Creates a {@link com.csvreader.CsvReader CsvReader} object using a file
 	 * as the data source.&nbsp;Uses a comma as the column delimiter and
-	 * ISO-8859-1 as the {@link java.nio.charset.Charset Charset}.
+	 * ISO-8859-1 as the {@link Charset Charset}.
 	 * 
 	 * @param fileName
 	 *            The path to the file to use as the data source.
@@ -165,7 +165,7 @@ public class CsvReader {
 
 	/**
 	 * Constructs a {@link com.csvreader.CsvReader CsvReader} object using a
-	 * {@link java.io.Reader Reader} object as the data source.
+	 * {@link Reader Reader} object as the data source.
 	 * 
 	 * @param inputStream
 	 *            The stream to use as the data source.
@@ -187,7 +187,7 @@ public class CsvReader {
 
 	/**
 	 * Constructs a {@link com.csvreader.CsvReader CsvReader} object using a
-	 * {@link java.io.Reader Reader} object as the data source.&nbsp;Uses a
+	 * {@link Reader Reader} object as the data source.&nbsp;Uses a
 	 * comma as the column delimiter.
 	 * 
 	 * @param inputStream
@@ -199,14 +199,14 @@ public class CsvReader {
 
 	/**
 	 * Constructs a {@link com.csvreader.CsvReader CsvReader} object using an
-	 * {@link java.io.InputStream InputStream} object as the data source.
+	 * {@link InputStream InputStream} object as the data source.
 	 * 
 	 * @param inputStream
 	 *            The stream to use as the data source.
 	 * @param delimiter
 	 *            The character to use as the column delimiter.
 	 * @param charset
-	 *            The {@link java.nio.charset.Charset Charset} to use while
+	 *            The {@link Charset Charset} to use while
 	 *            parsing the data.
 	 */
 	public CsvReader(InputStream inputStream, char delimiter, Charset charset) {
@@ -215,13 +215,13 @@ public class CsvReader {
 
 	/**
 	 * Constructs a {@link com.csvreader.CsvReader CsvReader} object using an
-	 * {@link java.io.InputStream InputStream} object as the data
+	 * {@link InputStream InputStream} object as the data
 	 * source.&nbsp;Uses a comma as the column delimiter.
 	 * 
 	 * @param inputStream
 	 *            The stream to use as the data source.
 	 * @param charset
-	 *            The {@link java.nio.charset.Charset Charset} to use while
+	 *            The {@link Charset Charset} to use while
 	 *            parsing the data.
 	 */
 	public CsvReader(InputStream inputStream, Charset charset) {
@@ -559,7 +559,7 @@ public class CsvReader {
 	/**
 	 * Creates a {@link com.csvreader.CsvReader CsvReader} object using a string
 	 * of data as the source.&nbsp;Uses ISO-8859-1 as the
-	 * {@link java.nio.charset.Charset Charset}.
+	 * {@link Charset Charset}.
 	 * 
 	 * @param data
 	 *            The String of data to use as the source.

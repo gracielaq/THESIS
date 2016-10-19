@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="/Users/gracielaquiambao/git/THESIS/THESIS/com/opencsv-2.2.jar"/>
+	<classpathentry kind="lib" path="/Users/gracielaquiambao/git/THESIS/THESIS/External jars/opencsv-2.2.jar"/>
 	<classpathentry kind="lib" path="/Users/gracielaquiambao/git/THESIS/THESIS/External jars/stanford-parser.jar"/>
 	<classpathentry kind="lib" path="/Users/gracielaquiambao/git/THESIS/THESIS/External jars/twitter4j-async-4.0.2 2.jar"/>
 	<classpathentry kind="lib" path="/Users/gracielaquiambao/git/THESIS/THESIS/External jars/twitter4j-async-4.0.2.jar"/>

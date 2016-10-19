@@ -23,7 +23,7 @@ public final class Model implements Serializable
 	/**
 	 * don't use {@link Arrays#equals(double[], double[])} here, cause 0.0 and -0.0 should be handled the same
 	 *
-	 * @see Linear#saveModel(java.io.Writer, Model)
+	 * @see Linear#saveModel(Writer, Model)
 	 */
 	protected static boolean equals( double[] a, double[] a2 )
 	{
@@ -263,7 +263,7 @@ public final class Model implements Serializable
 	}
 
 	/**
-	 * see {@link Linear#saveModel(java.io.File, Model)}
+	 * see {@link Linear#saveModel(File, Model)}
 	 */
 	public void save( File file ) throws IOException
 	{

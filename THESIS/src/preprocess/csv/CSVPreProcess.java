@@ -32,18 +32,19 @@ public class CSVPreProcess {
         String testFilePath="ModelAndTrain/dev";
         List<String[]> testList = processCSV(testCSVFile);
 
+        testid=0;
         //Skip the first line
         for (int currentRow = 1; currentRow < testList.size(); currentRow++) {
             File file = new File(testFilePath+"/"+(++testid)+".txt");
             FileWriter fileWriter;
             try {
                 fileWriter = new FileWriter(file);
+               // System.out.println("CREATE TEST "+file.getPath());
                 fileWriter.append(testList.get(currentRow)[1]);
                 fileWriter.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -57,8 +58,9 @@ public class CSVPreProcess {
             File file = new File(trainingFilePath+"/"+category+"/"+(++trainid)+".txt");
             try {
                 FileWriter fileWriter = new FileWriter(file);
-                fileWriter.append("USER:").append(trainingList.get(currentRow)[0]).append("TIME: ").append(trainingList.get(currentRow)[3]).append(" ");
+                fileWriter.append("USER: ").append(trainingList.get(currentRow)[0]).append("TIME: ").append(trainingList.get(currentRow)[3]).append(" ");
                 fileWriter.append(trainingList.get(currentRow)[2]);
+               // System.out.println("CREATE TEST "+file.getPath());
 
                 fileWriter.close();
             } catch (IOException e) {
@@ -73,7 +75,7 @@ public class CSVPreProcess {
             FileWriter fileWriter = new FileWriter(outputFile, false);
 
             fileWriter.append("@relation DISASTER\n\n")
-                    .append("@attribute category {0,1,2}\n");
+                    .append("@attribute category {0,1,2,3}\n");
             int numberOfUniqueWords = getNumberOfUniqueWords();
             for(int x=1;x<numberOfUniqueWords;x++){
                 fileWriter.append("@attribute word").append(x+" {TRUE,FALSE}\n");

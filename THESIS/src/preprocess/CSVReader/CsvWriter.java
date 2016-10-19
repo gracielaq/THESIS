@@ -72,7 +72,7 @@ public class CsvWriter {
 	 * @param delimiter
 	 *            The character to use as the column delimiter.
 	 * @param charset
-	 *            The {@link java.nio.charset.Charset Charset} to use while
+	 *            The {@link Charset Charset} to use while
 	 *            writing the data.
 	 */
 	public CsvWriter(String fileName, char delimiter, Charset charset) {
@@ -92,7 +92,7 @@ public class CsvWriter {
 	/**
 	 * Creates a {@link com.csvreader.CsvWriter CsvWriter} object using a file
 	 * as the data destination.&nbsp;Uses a comma as the column delimiter and
-	 * ISO-8859-1 as the {@link java.nio.charset.Charset Charset}.
+	 * ISO-8859-1 as the {@link Charset Charset}.
 	 * 
 	 * @param fileName
 	 *            The path to the file to output the data.
@@ -129,7 +129,7 @@ public class CsvWriter {
 	 * @param delimiter
 	 *            The character to use as the column delimiter.
 	 * @param charset
-	 *            The {@link java.nio.charset.Charset Charset} to use while
+	 *            The {@link Charset Charset} to use while
 	 *            writing the data.
 	 */
 	public CsvWriter(OutputStream outputStream, char delimiter, Charset charset) {

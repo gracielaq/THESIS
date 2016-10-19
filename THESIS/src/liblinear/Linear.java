@@ -14,6 +14,7 @@ import java.io.PrintStream;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.Formatter;
 import java.util.Locale;
 import java.util.Random;
@@ -38,7 +39,7 @@ import java.util.regex.Pattern;
  */
 public class Linear
 {
-
+	public static String accuracy;
 	/** used as complex return type */
 	private static class GroupClassesReturn
 	{
@@ -294,6 +295,7 @@ public class Linear
 		{
 			if ( DEBUG_OUTPUT == null )
 				return;
+
 			DEBUG_OUTPUT.printf( message );
 			DEBUG_OUTPUT.flush();
 		}
@@ -305,14 +307,17 @@ public class Linear
 		{
 			if ( DEBUG_OUTPUT == null )
 				return;
+
 			DEBUG_OUTPUT.printf( format, args );
 			DEBUG_OUTPUT.flush();
+			accuracy=String.format(format,args);
+
 		}
 	}
 
 	/**
 	 * Loads the model from the file with ISO-8859-1 charset.
-	 * It uses {@link java.util.Locale#ENGLISH} for number formatting.
+	 * It uses {@link Locale#ENGLISH} for number formatting.
 	 */
 	public static Model loadModel( File modelFile ) throws IOException
 	{
@@ -329,7 +334,7 @@ public class Linear
 
 	/**
 	 * Loads the model from inputReader.
-	 * It uses {@link java.util.Locale#ENGLISH} for number formatting.
+	 * It uses {@link Locale#ENGLISH} for number formatting.
 	 *
 	 * <p>
 	 * Note: The inputReader is <b>NOT closed</b> after reading or in case of an exception.
@@ -536,9 +541,12 @@ public class Linear
 			int dec_max_idx = 0;
 			for ( int i = 1; i < model.nr_class; i++ )
 			{
+				//System.out.println(Arrays.toString(dec_values));
 				if ( dec_values[ i ] > dec_values[ dec_max_idx ] )
 					dec_max_idx = i;
 			}
+
+			if(dec_values[dec_max_idx]<(-0.5)) return 3 ;
 			return model.label[ dec_max_idx ];
 		}
 	}
@@ -563,7 +571,7 @@ public class Linear
 
 	/**
 	 * Writes the model to the file with ISO-8859-1 charset.
-	 * It uses {@link java.util.Locale#ENGLISH} for number formatting.
+	 * It uses {@link Locale#ENGLISH} for number formatting.
 	 */
 	public static void saveModel( File modelFile, Model model ) throws IOException
 	{
@@ -573,7 +581,7 @@ public class Linear
 
 	/**
 	 * Writes the model to the modelOutput.
-	 * It uses {@link java.util.Locale#ENGLISH} for number formatting.
+	 * It uses {@link Locale#ENGLISH} for number formatting.
 	 *
 	 * <p>
 	 * <b>Note: The modelOutput is closed after reading or in case of an exception.</b>

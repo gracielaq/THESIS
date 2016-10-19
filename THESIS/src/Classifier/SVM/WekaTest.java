@@ -60,9 +60,9 @@ public class WekaTest {
 	}
 	//MAIN 
 	public static void main(String[] args) throws Exception {
-		BufferedReader trainFile = readDataFile("testWekaFile.arff");
+		BufferedReader trainFile = readDataFile("wekatrain.arff");
 
-		BufferedReader testfile = readDataFile("testWekaFile1.arff");
+		BufferedReader testfile = readDataFile("wekatest.arff");
 
 		Instances train = new Instances(trainFile);
 		Instances data = new Instances(testfile);
@@ -99,7 +99,7 @@ public class WekaTest {
 				predictions.appendElements(validation.predictions());
  
 				// Uncomment to see the summary for each training-testing pair.
-				System.out.println(models[j].toString());
+				//System.out.println(models[j].toString());
 			}
  
 			// Calculate overall accuracy of current classifier on all splits
@@ -111,6 +111,5 @@ public class WekaTest {
 					+ String.format("%.2f%%", accuracy)
 					+ "\n---------------------------------");
 		}
- 
 	}
 }

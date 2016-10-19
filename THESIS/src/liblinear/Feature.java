@@ -10,5 +10,5 @@ public interface Feature
 
 	double getValue();
 
-	void setValue( double value );
+	void setValue(double value);
 }

@@ -1,4 +1,5 @@
 package template;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -6,6 +7,22 @@ import java.util.Date;
 import support.model.*;
 
 public class tempBean {
+	//TEMPORARY NER TAGS, MODIFY AFTER basta nakumpirma kung ano yung tags talaga
+	final static String NUMBER_OF_DEATHS_TAG="NUMOFDEATHS";
+	final static String NUMBER_OF_INJURIES ="NUMOFINJURIES";
+	final static String NUMBER_OF_MISSING ="NUMOFMISSING";
+	final static String TYPHOON_NAME_TAG = "TYPHOON-NAME";
+	final static String LOCATION_TAG="LOCATION";
+	final static String MONEY_TAG="MONEY";
+	final static String KMPH_TAG="KMPH";
+	final static String PETSA_TAG="DATE";
+	final static String MAGNITUDE_TAG="MAGNITUDE";
+	final static String SIGNAL_TAG="SIGNAL";
+	final static String INTENSITY_TAG="INTENSITY";
+	final static String NUMBER_OF_AFTERSHOCKS_TAG="NUMOFAFTERSHOCKS";
+	final static String NUMBER_OF_NAAPEKTUHAN_TAG ="NUMOFAFFECTED";
+	final static String WATER_LEVEL_TAG ="WATERLEVEL";
+	final static String TIME_TAG ="TIME";
 	private String bilangNgNamatay;
 	private String bilangNgSugatan;
 	private String bilangNgNawawala;
@@ -21,30 +38,8 @@ public class tempBean {
 	private String bilangNgNaapektuhan;
 	private String lebelNgTubig;
 	private String oras;
-	
-	
-	
-	//TEMPORARY NER TAGS, MODIFY AFTER basta nakumpirma kung ano yung tags talaga
-	//hahaha
-	final static String NUMBER_OF_DEATHS_TAG="NUMOFDEATHS";
-	final static String NUMBER_OF_INJURIES ="NUMOFINJURIES";
-	final static String NUMBER_OF_MISSING ="NUMOFMISSING";
-	final static String TYPHOON_NAME_TAG = "TYPHOON-NAME";
-	final static String LOCATION_TAG="LOCATION";
-	final static String MONEY_TAG="MONEY";
-	final static String KMPH_TAG="KMPH";
-	final static String PETSA_TAG="PETSA";
-	final static String MAGNITUDE_TAG="MAGNITUDE";
-	final static String SIGNAL_TAG="SIGNAL";
-	final static String INTENSITY_TAG="INTENSITY";
-	final static String NUMBER_OF_AFTERSHOCKS_TAG="NUMOFAFTERSHOCKS";
-	final static String NUMBER_OF_NAAPEKTUHAN_TAG ="NUMOFAFFECTED";
-	final static String WATER_LEVEL_TAG ="WATERLEVEL";
-	final static String TIME_TAG ="TIME";
 
-	
-	
-	
+	ArrayList<String> locations = new ArrayList<>();
 	/**
 	 * function na nagrereturn ng tempBean na lang wew
 	 * @param tokenList a list of Tokens within a tweet with an NER tag
@@ -52,16 +47,17 @@ public class tempBean {
 	 */
 	public static tempBean createTempBean(ArrayList<Token> tokenList){
 		tempBean templateBean = new tempBean();
+
+		//for each token
 		for(Token token :tokenList){
-			//tinitignan ang ner tag ng token at ilalagay sa tempBean 
-			//hirap mag-ingles beh
-			//hirap kaya magdocument besh, pano nahuhuhu
+			//tinitignan ang ner tag ng token at ilalagay sa tempBean
 			switch(token.getNERTag()){
 				case NUMBER_OF_DEATHS_TAG:
 					templateBean.setBilangNgNamatay(token.getWord());
 				break;
 				case LOCATION_TAG:
-					templateBean.setLugar(token.getWord());
+					//templateBean.setLugar(token.getWord());
+					templateBean.addLocation(token.getWord());
 					break;
 				case NUMBER_OF_INJURIES:
 					templateBean.setBilangNgSugatan(token.getWord());
@@ -102,8 +98,6 @@ public class tempBean {
 				case TIME_TAG:
 					templateBean.setOras(token.getWord());
 					break;
-					
-				
 			}
 		}
 		return templateBean;
@@ -121,9 +115,7 @@ public class tempBean {
 	public void setBilangNgSugatan(String bilangNgSugatan) {
 		this.bilangNgSugatan = bilangNgSugatan;
 	}
-	public String getBilangNgNawawala() {
-		return bilangNgNawawala;
-	}
+	public String getBilangNgNawawala() { return bilangNgNawawala; }
 	public void setBilangNgNawawala(String bilangNgNawawala) {
 		this.bilangNgNawawala = bilangNgNawawala;
 	}
@@ -133,11 +125,9 @@ public class tempBean {
 	public void setPangalanNgBagyo(String pangalanNgBagyo) {
 		this.pangalanNgBagyo = pangalanNgBagyo;
 	}
-	public String getLugar() {
-		return lugar;
-	}
+	public String getLugar() { return locationsToString(); }
 	public void setLugar(String lugar) {
-		this.lugar = lugar;
+		locations.add(lugar);
 	}
 	public String getPera() {
 		return pera;
@@ -199,9 +189,32 @@ public class tempBean {
 	public void setOras(String oras) {
 		this.oras = oras;
 	}
-	
-	
-	
-	
-	
+
+
+	public void addLocation(String location){
+		locations.add(location);
+	}
+
+
+	public String locationsToString(){
+
+		String lugarString ="";
+		if(locations.size()==0)return null;
+		if(locations.size()==1) return locations.get(0);
+		if(locations.size()==2)return locations.get(0)+" & " +locations.get(1);
+
+		for(int x=0;x<locations.size();x++){
+			if(x==locations.size()-1){
+				lugarString+=" & ";
+				lugarString+=locations.get(x);
+
+			}else if(x==locations.size()-2){
+				lugarString+=locations.get(x);
+			}
+			else{
+				lugarString+=locations.get(x)+", ";
+			}
+		}
+		return lugarString;
+	}
 }

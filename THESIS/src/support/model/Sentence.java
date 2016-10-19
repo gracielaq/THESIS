@@ -139,7 +139,7 @@ public class Sentence {
 	
 	/**
 	 * Get a token using index
-	 * @param ith index
+	 // @param ith index
 	 * @return the ith token
 	 */
 	public Token getToken(int i){
@@ -189,8 +189,8 @@ public class Sentence {
 	public void replaceToken(int i, Token token){
 		this.sentence.set(i, token);
 	}
-	
-	public String getRawTweet(){
+
+    public String getRawTweet(){
 		return tweets.getTweet();
 	}
 	
