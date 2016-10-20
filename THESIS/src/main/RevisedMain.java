@@ -15,27 +15,27 @@ import template.TemplateModule;
 import template.tempBean;
 
 import javax.swing.*;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class RevisedMain {
 	final static String testSetCSV = "Data Sheets/Data Sheet.csv";
 	final static String trainingSetCSV = "TrainingSet.csv";
 	static String fileCSV="";
-	static String fileCSV70="Data Sheet with 30% unrelated tweets.csv";
-	static String fileCSV50="Data Sheet with 50% unrelated tweets.csv";
+	static String fileCSV70="Test Case 2 - 70% Related.csv";
+	static String fileCSV50="Test Case 3 - 50% Related.csv";
 	public static int counterEarthquake,counterTyphoon,counterFlood=0;
 
 	public static void main(String args[]) {
 
 
 		try {
-			FileUtils.cleanDirectory(new File("ModelAndTrain/dev"));
+			FileUtils.cleanDirectory(new File("ModelAndTrain/dev/Earthquake"));
+			FileUtils.cleanDirectory(new File("ModelAndTrain/dev/Typhoon"));
+			FileUtils.cleanDirectory(new File("ModelAndTrain/dev/Flood"));
+			FileUtils.cleanDirectory(new File("ModelAndTrain/dev/Others"));
 			FileUtils.cleanDirectory(new File("ModelAndTrain/training/Earthquake"));
 			FileUtils.cleanDirectory(new File("ModelAndTrain/training/Typhoon"));
 			FileUtils.cleanDirectory(new File("ModelAndTrain/training/Flood"));
@@ -63,13 +63,12 @@ public class RevisedMain {
 			e.printStackTrace();
 		}
 
-
 		//File file = getFolderPath();
 		// Test SVM
 		if(fileCSV50.equals(new File(fileCSV).getName())){
 			String[] testArgs = { "ModelAndTrain/dev_label_50.txt",
 					"ModelAndTrain/dev" };
-			//System.out.println("==========="+testArgs[0]+"=============");
+			System.out.println("==========="+testArgs[0]+"=============");
 			try {
 				Test.main(testArgs);
 			} catch (IOException | InvalidInputDataException e) {
@@ -79,7 +78,7 @@ public class RevisedMain {
 		else if(fileCSV70.equals(new File(fileCSV).getName())){
 			String[] testArgs = { "ModelAndTrain/dev_label_70.txt",
 					"ModelAndTrain/dev" };
-			//System.out.println("==========="+testArgs[0]+"=============");
+			System.out.println("==========="+testArgs[0]+"=============");
 			try {
 				Test.main(testArgs);
 			} catch (IOException | InvalidInputDataException e) {
@@ -89,9 +88,10 @@ public class RevisedMain {
 		else{
 			String[] testArgs = { "ModelAndTrain/dev_label.txt",
 					"ModelAndTrain/dev" };
-			//System.out.println("==========="+testArgs[0]+"=============");
+			System.out.println("==========="+testArgs[0]+"=============");
 			try {
 				Test.main(testArgs);
+
 			} catch (IOException | InvalidInputDataException e) {
 				e.printStackTrace();
 			}
@@ -104,11 +104,10 @@ public class RevisedMain {
         // Start NER
 		// Typhoon
 		ArrayList<ArrayList<String>> preNER = Twokenizer.tokenizeFile(new File(
-				"ModelAndTrain/training/Typhoon"));
+				"ModelAndTrain/dev/Typhoon"));
 
 		ArrayList<Sentence> postNER = new ArrayList<>();
 		for (ArrayList<String> tweet : preNER) {
-			counterTyphoon++;
 			SomidiaNERImpl ner = new SomidiaNERImpl();
 			Sentence NamedEntities = ner.execute(new Sentence(tweet));
 			
@@ -129,14 +128,13 @@ public class RevisedMain {
 			TemplateModule.createTyphoonFile(news);
 
 		}
-/*
+
 		// Earthquake
 		ArrayList<ArrayList<String>> preNER2 = Twokenizer.tokenizeFile(new File(
-				"ModelAndTrain/training/Earthquake"));
+				"ModelAndTrain/dev/Earthquake"));
 
 		ArrayList<Sentence> postNER2 = new ArrayList<>();
 		for (ArrayList<String> tweet : preNER2) {
-
 			//NER PROCESS
 			SomidiaNERImpl ner2 = new SomidiaNERImpl();
 			Sentence NamedEntities2 = ner2.execute(new Sentence(tweet));
@@ -168,10 +166,11 @@ public class RevisedMain {
 		
 		//Flood
 		ArrayList<ArrayList<String>> preNER3 = Twokenizer.tokenizeFile(new File(
-				"ModelAndTrain/training/Flood"));
+				"ModelAndTrain/dev/Flood"));
 
 		ArrayList<Sentence> postNER3 = new ArrayList<>();
 		for (ArrayList<String> tweet : preNER3) {
+			counterFlood++;
 			SomidiaNERImpl ner3 = new SomidiaNERImpl();
 			Sentence NamedEntities3 = ner3.execute(new Sentence(tweet));
 			
@@ -191,7 +190,7 @@ public class RevisedMain {
 			
 			TemplateModule.createFloodFile(news3);
 
-		}*/
+		}
 	}
 	public String getFile(File file){
 		fileCSV=file+"";

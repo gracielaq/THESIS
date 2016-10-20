@@ -4,12 +4,15 @@ import Classifier.SVM.Classifier;
 import Classifier.SVM.Train;
 import liblinear.Linear;
 import main.RevisedMain;
+import org.apache.commons.io.FileUtils;
+import preprocess.csv.CSVPreProcess;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.io.*;
+import java.nio.Buffer;
 
 /**
  * Created by gracielaquiambao on 10/12/16.
@@ -23,7 +26,7 @@ public class FilNeG extends JFrame {
     private JButton button1;
     private JButton typhoonButton;
     private JButton floodButton;
-
+    public static int earthquakeGenerated=0,typhoonGenerated=0, floodGenerated=0;
 
     public FilNeG() {
 
@@ -32,36 +35,84 @@ public class FilNeG extends JFrame {
         pack();
         setVisible(true);
 
+        //COUNT GENERATED TEMPLATES
+        //earthquake
+        File[] earthquakeFiles2=new File("EarthquakeNewsReport").listFiles(pathname -> pathname.getName().endsWith(".txt"));
+        for(File textFile:earthquakeFiles2){
+            try {
+                BufferedReader b= new BufferedReader(new FileReader(textFile));
+                if(b.readLine()!=null){
+                    earthquakeGenerated++;
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        //typhoon
+        File[] typhoonFiles2=new File("TyphoonNewsReport").listFiles(pathname -> pathname.getName().endsWith(".txt"));
+        for(File textFile:typhoonFiles2){
+            try {
+                BufferedReader b= new BufferedReader(new FileReader(textFile));
+                if(b.readLine()!=null){
+                    typhoonGenerated++;
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        //flood
+        File[] floodFiles2=new File("FloodNewsReport").listFiles(pathname -> pathname.getName().endsWith(".txt"));
+        for(File textFile:floodFiles2){
+            try {
+                BufferedReader b= new BufferedReader(new FileReader(textFile));
+                if(b.readLine()!=null){
+                    floodGenerated++;
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
 
         //SVM ACCURACY OF CLASSIFICATION
         try {
-            Train train=new Train();
+
             Classifier classifier=new Classifier();
             Linear acc=new Linear();
-            RevisedMain r= new RevisedMain();
+            CSVPreProcess counter=new CSVPreProcess();
            // svmAccu.append("\n"+train.trainTime+"\n");
            // svmAccu.append(train.testTime+"\n");
             svmAccu.append("\n"+classifier.inst+"\n");
             svmAccu.append(acc.accuracy);
-            svmAccu.append("\n"+"Tweets Per Category:"+"\n======================");
-            svmAccu.append("Typhoon: "+r.counterTyphoon);
-
-
+            svmAccu.append("\n"+"Tweets Per Category:"+"\n====================");
+            svmAccu.append("\nTyphoon: "+counter.counterTyphoon);
+            svmAccu.append("\nEarthquake: "+counter.counterEarthquake);
+            svmAccu.append("\nFlood: "+counter.counterFlood);
+            svmAccu.append("\n\n"+"Templates Generated:"+"\n====================");
+            svmAccu.append("\nTyphoon: "+typhoonGenerated);
+            svmAccu.append("\nEarthquake: "+ earthquakeGenerated);
+            svmAccu.append("\nFlood: "+floodGenerated);
         }
         catch(Exception except){
             except.printStackTrace();
         }
         //NEWS TEXT AREA, DEFAULT EARTHQUAKE
-
+        news.setText("");
         File[] earthquakeFiles=new File("EarthquakeNewsReport").listFiles();
-        news.append("\nNEWS: EARTHQUAKE" + "\n =======================");
+        news.append("\nNEWS: EARTHQUAKE" + "\n ======================");
         for(File textFile:earthquakeFiles){
             try {
                 BufferedReader bufferedReader = new BufferedReader(new FileReader(textFile));
 
-                String line ="";
+                String line;
                 String exampleOut="";
+
                 while((line=bufferedReader.readLine())!=null){
 
                     news.append("\n"+line+"\n");
@@ -69,16 +120,17 @@ public class FilNeG extends JFrame {
 
                 }
                 bufferedReader.close();
-                System.out.println(exampleOut);
+               System.out.println(exampleOut);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
+
         }
         //Earthquake Button
         earthquakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                news.setText("");
+                news.setText(" ");
                 File[] earthquakeFiles=new File("EarthquakeNewsReport").listFiles();
                 news.append("\nNEWS: EARTHQUAKE" + "\n =======================");
                 for(File textFile:earthquakeFiles){
@@ -87,8 +139,8 @@ public class FilNeG extends JFrame {
 
                         String line ="";
                         while((line=bufferedReader.readLine())!=null){
-
                             news.append("\n"+line+"\n");
+
                         }
                         bufferedReader.close();
 
@@ -110,16 +162,17 @@ public class FilNeG extends JFrame {
                     try {
                         BufferedReader bufferedReader = new BufferedReader(new FileReader(textFile));
 
-                        String line ="";
+                        String line =" ";
                         while((line=bufferedReader.readLine())!=null){
-
                             news.append("\n"+line+"\n");
+
                         }
                         bufferedReader.close();
 
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
+
                 }
             }
         });
@@ -137,14 +190,15 @@ public class FilNeG extends JFrame {
 
                         String line ="";
                         while((line=bufferedReader.readLine())!=null){
-
                             news.append("\n"+line+"\n");
+
                         }
                         bufferedReader.close();
 
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
+
                 }
             }
         });
@@ -154,31 +208,6 @@ public class FilNeG extends JFrame {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                /*JFileChooser chooser = new JFileChooser();
-                // optionally set chooser options ...
-                if (chooser.showOpenDialog(button1) == JFileChooser.APPROVE_OPTION) {
-                    File f = chooser.getSelectedFile();
-                    // read  and/or display the file somehow. ....
-                    if(f!=null){
-                        dispose();
-                        RevisedMain rm= new RevisedMain();
-                        rm.getFile(f);
-                        new RevisedMain();
-
-                        String[] arguments = new String[] {"123"};
-                        RevisedMain.main(arguments);
-
-                        //Reload FilneG Pane
-                        filnegPane.setVisible(true);
-
-
-                    }
-
-
-
-                } else {
-                    // user changed their mind
-                }*/
                 FilNeG.this.setVisible(false);
                 Main main=new Main();
                 main.setVisible(true);
@@ -190,17 +219,6 @@ public class FilNeG extends JFrame {
 
     public static void main(String[] args) {
         FilNeG filNeG = new FilNeG();
-        /*try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                System.out.println(info.getName());
-                if ("Metal".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
         filNeG.setVisible(true);
     }
 

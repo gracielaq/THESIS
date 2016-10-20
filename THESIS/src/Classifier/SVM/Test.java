@@ -33,6 +33,7 @@ public class Test
 		end = System.currentTimeMillis();
 		//classifyTime(end,start);
 		classifier.writeResultFile();
+
 	}
 
 	public static String buildTestTime(long end, long start){

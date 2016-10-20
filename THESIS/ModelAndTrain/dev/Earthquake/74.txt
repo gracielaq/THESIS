@@ -1,0 +1,1 @@
+@phivolcs_dost: #EarthquakePH information number 2 Magnitude = 4.2 Depth = 064km Location = Kawayan (Biliran)

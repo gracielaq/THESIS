@@ -546,7 +546,7 @@ public class Linear
 					dec_max_idx = i;
 			}
 
-			if(dec_values[dec_max_idx]<(-0.5)) return 3 ;
+			if(dec_values[dec_max_idx]<(-0.03)) return 3 ;
 			return model.label[ dec_max_idx ];
 		}
 	}

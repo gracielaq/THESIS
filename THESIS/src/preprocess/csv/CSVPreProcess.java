@@ -15,6 +15,7 @@ public class CSVPreProcess {
 
     public static int testid=0;
     public static int trainid=0;
+    public static int counterEarthquake=0,counterFlood=0,counterTyphoon=0;
     public static List<String[]> processCSV(File csvFile){
         List myEntries;
         try {
@@ -31,16 +32,83 @@ public class CSVPreProcess {
     public static void createTestFiles(File testCSVFile){
         String testFilePath="ModelAndTrain/dev";
         List<String[]> testList = processCSV(testCSVFile);
+        try{
+            BufferedReader b =new BufferedReader(new FileReader("result.txt"));
+            testid=0;
+            //Skip the first line
+            for (int currentRow = 1; currentRow < testList.size(); currentRow++) {
+                String result=b.readLine();
+                String[] s=result.split(" ");
 
-        testid=0;
-        //Skip the first line
-        for (int currentRow = 1; currentRow < testList.size(); currentRow++) {
-            File file = new File(testFilePath+"/"+(++testid)+".txt");
-            FileWriter fileWriter;
+                //create test files in dev/Earthquake
+                if(s[1].equals("0")){
+                    File file = new File(testFilePath+"/"+"Earthquake"+"/"+(++testid)+".txt");
+                    FileWriter fileWriter;
+                    counterEarthquake++;
+                    try {
+                        fileWriter = new FileWriter(file);
+                        // System.out.println("CREATE TEST "+file.getPath());
+                        fileWriter.append(testList.get(currentRow)[1]);
+                        fileWriter.close();
+                    }catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                //create test files in dev/Flood
+                else if(s[1].equals("1")){
+                    File file = new File(testFilePath+"/"+"Flood"+"/"+(++testid)+".txt");
+                    FileWriter fileWriter;
+                    counterFlood++;
+                    try {
+                        fileWriter = new FileWriter(file);
+                        // System.out.println("CREATE TEST "+file.getPath());
+                        fileWriter.append(testList.get(currentRow)[1]);
+                        fileWriter.close();
+                    }catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                //create test files for dev/Typhoon
+                else if(s[1].equals("2")){
+                    File file = new File(testFilePath+"/"+"Typhoon"+"/"+(++testid)+".txt");
+                    FileWriter fileWriter;
+
+                    counterTyphoon++;
+
+                    try {
+                        fileWriter = new FileWriter(file);
+                        // System.out.println("CREATE TEST "+file.getPath());
+                        fileWriter.append(testList.get(currentRow)[1]);
+                        fileWriter.close();
+                    }catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                //create test files for dev/Others
+                else{
+                    File file = new File(testFilePath+"/"+"Others"+"/"+(++testid)+".txt");
+                    FileWriter fileWriter;
+
+                    try {
+                        fileWriter = new FileWriter(file);
+                        // System.out.println("CREATE TEST "+file.getPath());
+                        fileWriter.append(testList.get(currentRow)[1]);
+                        fileWriter.close();
+                    }catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        for (int currentRow = 1; currentRow <testList.size() ; currentRow++) {
+            File file = new File(testFilePath+"/"+(++trainid)+".txt");
             try {
-                fileWriter = new FileWriter(file);
-               // System.out.println("CREATE TEST "+file.getPath());
+                FileWriter fileWriter = new FileWriter(file);
                 fileWriter.append(testList.get(currentRow)[1]);
+
                 fileWriter.close();
             } catch (IOException e) {
                 e.printStackTrace();

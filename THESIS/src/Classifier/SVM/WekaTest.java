@@ -95,11 +95,14 @@ public class WekaTest {
 			// For each training-testing split pair, train and test the classifier
 			for (int i = 0; i < trainingSplits.length; i++) {
 				Evaluation validation = classify(models[j], trainingSplits[i], testingSplits[i]);
- 
+
 				predictions.appendElements(validation.predictions());
- 
+ 				validation.weightedFMeasure();
 				// Uncomment to see the summary for each training-testing pair.
-				//System.out.println(models[j].toString());
+				System.out.println(models[j].toString());
+				System.out.println("FMeasure: "+validation.weightedFMeasure()*100+"%");
+				System.out.println("Precision: "+validation.weightedPrecision()*100+"%");
+				System.out.println("Recall: "+validation.weightedRecall()*100+"%");
 			}
  
 			// Calculate overall accuracy of current classifier on all splits
@@ -110,6 +113,7 @@ public class WekaTest {
 			System.out.println("Accuracy of " + models[j].getClass().getSimpleName() + ": "
 					+ String.format("%.2f%%", accuracy)
 					+ "\n---------------------------------");
+			System.out.println();
 		}
 	}
 }

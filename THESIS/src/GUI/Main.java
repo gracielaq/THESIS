@@ -62,7 +62,7 @@ public class Main extends JFrame{
     }
 
     public static void main(String[] args) {
-        /*try {
+        try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 //System.out.println(info.getName());
                 if ("Metal".equals(info.getName())) {
@@ -72,7 +72,7 @@ public class Main extends JFrame{
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
         Main main = new Main();
     }
 

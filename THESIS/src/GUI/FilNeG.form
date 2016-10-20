@@ -156,7 +156,7 @@
                   <background color="-592653"/>
                   <font name="Damascus" size="12"/>
                   <lineWrap value="false"/>
-                  <text value="&#10;NEWS&#10;======================"/>
+                  <text value="&#10;&#10;&#10;&#10;"/>
                 </properties>
               </component>
             </children>
