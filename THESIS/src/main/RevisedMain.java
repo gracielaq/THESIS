@@ -126,7 +126,7 @@ public class RevisedMain {
 			System.out.println("NEWS: "+news);
 			
 			TemplateModule.createTyphoonFile(news);
-
+			System.out.println("\n");
 		}
 
 		// Earthquake
