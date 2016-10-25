@@ -1,1 +1,1 @@
-#EarthquakePH _�� Magnitude = 3.2 Depth = 3km Location: 16.57�N, 119.85�E - 020 km N 12� W of Bolinao (Pangasinan)
+USER: @philredcrossTIME: 7/30/15 1:02 AM #EarthquakePH Magnitude = 3.2 Depth = 3km Location: 16.57N, 119.85E - 020 km N 12 W of Bolinao (Pangasinan)

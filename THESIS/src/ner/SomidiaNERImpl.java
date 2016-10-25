@@ -33,6 +33,7 @@ public class SomidiaNERImpl implements NERInterface {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
 			while (s.hasNextLine()) {
 				String line = s.nextLine().trim();
 				if (line.contains("LOCATION")) {
@@ -40,12 +41,12 @@ public class SomidiaNERImpl implements NERInterface {
 				}else if (token.getWord().equalsIgnoreCase(line.toString())) {
 					token.setNERTag(category);
 					tweet.replaceToken(i, token);
-				}else if(Pattern.matches("\\d+\\s([a-z]*\\s)*#*([Nn]amatay|[Pp]atay|[Nn]asawi)"
+				}else if(Pattern.matches("\\d+,?\\s([a-z]*,?\\s)*#*([Nn]amatay|[Pp]atay|[Nn]asawi|[Dd]ead)"
 						,token.getWord())){
 					token.setNERTag("NUMOFDEATHS");
 					tweet.replaceToken(i, token);
 					break;
-				}else if(Pattern.matches("\\d+\\s([a-z]*\\s)*#*([Ss]ugatan)"
+				}else if(Pattern.matches("\\d+\\s([a-z]*\\s)*#*([Ss]ugatan|[Ii]njured)"
 						,token.getWord())){
 					token.setNERTag("NUMOFINJURIES");
 					tweet.replaceToken(i, token);
@@ -55,22 +56,28 @@ public class SomidiaNERImpl implements NERInterface {
                     token.setNERTag("NUMOFAFFECTED");
                     tweet.replaceToken(i, token);
                     break;
-                }else if(Pattern.matches("\\d+\\s([a-z]*\\s)*#*([Nn]awawala)"
+                }else if(Pattern.matches("\\d+\\s([a-z]*\\s)*#*([Nn]awawala)|([Mm]issing)"
 						,token.getWord())){
 					token.setNERTag("NUMOFMISSING");
 					tweet.replaceToken(i, token);
 					break;
-				}else if(Pattern.matches("(#)*(((B|b)agyong)|(T|t)yphoon)(\\s#*(P|p)apangalanang)*\\s'*(([A-Za-z]+'*)|('*#([A-Za-z])+'*))"
+				} else if(token.getWord().startsWith("#") && !token.getWord().startsWith("Earthquake", 1) && token.getWord().endsWith("PH")){
+					String name = token.getWord().replace("PH", "");
+					token.setWord(name);
+					token.setNERTag("TYPHOON-NAME");
+					tweet.replaceToken(i, token);
+					break;
+				} else if(Pattern.matches("(#)*(((B|b)agyong)|(T|t)yphoon)(\\s#*(P|p)apangalanang)*\\s?'*(([A-Za-z]+'*)|('*#([A-Za-z])+'*))"
 						,token.getWord())){
 					token.setNERTag("TYPHOON-NAME");
 					tweet.replaceToken(i, token);
 					break;
-				}else if(Pattern.matches("([Mm]agnitude\\s\\d(.\\d)?)|((\\d(.\\d)?\\s)?[Mm]agnitude)"
+				}else if(Pattern.matches("([Mm]agnitude((\\s)|(\\s?=\\s?)|(:))\\d(.\\d)?)|(\\d((.\\d)?\\s)?(-)?[Mm]agnitude)"
 						,token.getWord())){
 					token.setNERTag("MAGNITUDE");
 					tweet.replaceToken(i, token);
 					break;
-				}else if(Pattern.matches("(\\b[Ss]ignal)\\s((#(\\s)*\\d)|([Nn]o(.)*\\d))"
+				}else if(Pattern.matches("(\\b[Ss]ignal)\\s((#(\\s)*\\d)|([Nn]o(.)*\\d)|\\d)"
 						,token.getWord())){
 					token.setNERTag("SIGNAL");
 					tweet.replaceToken(i, token);

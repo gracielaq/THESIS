@@ -26,7 +26,7 @@ public class FilNeG extends JFrame {
     private JButton button1;
     private JButton typhoonButton;
     private JButton floodButton;
-    public static int earthquakeGenerated=0,typhoonGenerated=0, floodGenerated=0;
+    public int earthquakeGenerated=0,typhoonGenerated=0, floodGenerated=0;
 
     public FilNeG() {
 
@@ -44,10 +44,8 @@ public class FilNeG extends JFrame {
                 if(b.readLine()!=null){
                     earthquakeGenerated++;
                 }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch(Exception e){
+
             }
         }
         //typhoon
@@ -108,9 +106,9 @@ public class FilNeG extends JFrame {
         news.append("\nNEWS: EARTHQUAKE" + "\n ======================");
         for(File textFile:earthquakeFiles){
             try {
-                BufferedReader bufferedReader = new BufferedReader(new FileReader(textFile));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(textFile), "UTF8"));
 
-                String line;
+                String line="";
                 String exampleOut="";
 
                 while((line=bufferedReader.readLine())!=null){
@@ -120,7 +118,7 @@ public class FilNeG extends JFrame {
 
                 }
                 bufferedReader.close();
-               System.out.println(exampleOut);
+
             } catch (Exception exception) {
                 exception.printStackTrace();
             }

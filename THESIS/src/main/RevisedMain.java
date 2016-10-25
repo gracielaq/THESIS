@@ -32,12 +32,16 @@ public class RevisedMain {
 
 
 		try {
-			FileUtils.cleanDirectory(new File("ModelAndTrain/dev/Earthquake"));
-			FileUtils.cleanDirectory(new File("ModelAndTrain/dev/Typhoon"));
-			FileUtils.cleanDirectory(new File("ModelAndTrain/dev/Flood"));
-			FileUtils.cleanDirectory(new File("ModelAndTrain/dev/Others"));
+			//Clean and create directories for Test Files
+			FileUtils.cleanDirectory(new File("ModelAndTrain/dev"));
+			boolean earthquake=(new File("ModelAndTrain/dev/Earthquake")).mkdirs();
+			boolean typhoon=(new File("ModelAndTrain/dev/Typhoon")).mkdirs();
+			boolean flood=(new File("ModelAndTrain/dev/Flood")).mkdirs();
+			boolean others=(new File("ModelAndTrain/dev/Others")).mkdirs();
+			//Clean Test Files
 			FileUtils.cleanDirectory(new File("ModelAndTrain/training/Earthquake"));
 			FileUtils.cleanDirectory(new File("ModelAndTrain/training/Typhoon"));
+			FileUtils.cleanDirectory(new File("ModelAndTrain/training/Flood"));
 			FileUtils.cleanDirectory(new File("ModelAndTrain/training/Flood"));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -46,7 +50,7 @@ public class RevisedMain {
 
 		CSVPreProcess.createTestFiles(new File(fileCSV));
 		CSVPreProcess.createTrainingFile(new File(trainingSetCSV));
-		//System.out.println("===============" + fileCSV + "===============");
+		System.out.println("===============" + fileCSV + "===============");
 
 		/*
 		 * SVM CLASSIFIER To add more classes, go to ModelAndTrain and add in
@@ -105,6 +109,7 @@ public class RevisedMain {
 		// Typhoon
 		ArrayList<ArrayList<String>> preNER = Twokenizer.tokenizeFile(new File(
 				"ModelAndTrain/dev/Typhoon"));
+		System.out.println("~~~~~TYPHOON");
 
 		ArrayList<Sentence> postNER = new ArrayList<>();
 		for (ArrayList<String> tweet : preNER) {
@@ -121,7 +126,6 @@ public class RevisedMain {
 			}
 			
 			tempBean temp = tempBean.createTempBean(tokenList);
-			//System.out.println("====================="+temp.getLugar());
 			String news = TemplateModule.Typhoon(temp);
 			System.out.println("NEWS: "+news);
 			
@@ -132,7 +136,7 @@ public class RevisedMain {
 		// Earthquake
 		ArrayList<ArrayList<String>> preNER2 = Twokenizer.tokenizeFile(new File(
 				"ModelAndTrain/dev/Earthquake"));
-
+		System.out.println("~~~~~EARTHQUAAAAAAAKE");
 		ArrayList<Sentence> postNER2 = new ArrayList<>();
 		for (ArrayList<String> tweet : preNER2) {
 			//NER PROCESS
@@ -161,12 +165,13 @@ public class RevisedMain {
 
 			//dito yung paggawa ng file..
 			TemplateModule.createEarthquakeFile(news2);
-
+			System.out.println("\n");
 		}
 		
 		//Flood
 		ArrayList<ArrayList<String>> preNER3 = Twokenizer.tokenizeFile(new File(
 				"ModelAndTrain/dev/Flood"));
+		System.out.println("~~~~~FLOOOOOOD");
 
 		ArrayList<Sentence> postNER3 = new ArrayList<>();
 		for (ArrayList<String> tweet : preNER3) {
@@ -189,7 +194,7 @@ public class RevisedMain {
 			System.out.println("NEWS: "+news3);
 			
 			TemplateModule.createFloodFile(news3);
-
+			System.out.println("\n");
 		}
 	}
 	public String getFile(File file){

@@ -28,7 +28,7 @@
 28.txt 0
 29.txt 0
 30.txt 0
-31.txt 2
+31.txt 0
 32.txt 0
 33.txt 0
 34.txt 0
@@ -128,7 +128,7 @@
 128.txt 2
 129.txt 2
 130.txt 3
-131.txt 2
+131.txt 0
 132.txt 3
 133.txt 2
 134.txt 2
@@ -142,7 +142,7 @@
 142.txt 3
 143.txt 2
 144.txt 2
-145.txt 2
+145.txt 0
 146.txt 2
 147.txt 2
 148.txt 2
@@ -337,7 +337,7 @@
 337.txt 2
 338.txt 2
 339.txt 2
-340.txt 2
+340.txt 0
 341.txt 2
 342.txt 2
 343.txt 2
@@ -479,14 +479,14 @@
 479.txt 2
 480.txt 2
 481.txt 2
-482.txt 3
-483.txt 3
-484.txt 3
+482.txt 2
+483.txt 2
+484.txt 2
 485.txt 2
 486.txt 2
 487.txt 2
 488.txt 2
-489.txt 3
+489.txt 0
 490.txt 0
 491.txt 0
 492.txt 0

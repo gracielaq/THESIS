@@ -1,1 +1,1 @@
-@phivolcs_dost: #EarthquakePH 07 Sep. 2015 12:09 PM Magnitude = 3.9 Depth = 010 kilometers Location =Zamboanga City
+USER: @philredcross TIME: 9/26/15 8:48 PM @phivolcs_dost: #EarthquakePH 07 Sep. 2015 12:09 PM Magnitude = 3.9 Depth = 010 kilometers Location =Zamboanga City

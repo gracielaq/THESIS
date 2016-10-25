@@ -48,6 +48,7 @@ public class CSVPreProcess {
                     try {
                         fileWriter = new FileWriter(file);
                         // System.out.println("CREATE TEST "+file.getPath());
+                        fileWriter.append("USER: ").append(testList.get(currentRow)[2]).append("TIME: ").append(testList.get(currentRow)[0]).append(" ");
                         fileWriter.append(testList.get(currentRow)[1]);
                         fileWriter.close();
                     }catch (IOException e) {
@@ -62,6 +63,7 @@ public class CSVPreProcess {
                     try {
                         fileWriter = new FileWriter(file);
                         // System.out.println("CREATE TEST "+file.getPath());
+                        fileWriter.append("USER: ").append(testList.get(currentRow)[2]).append("TIME: ").append(testList.get(currentRow)[0]).append(" ");
                         fileWriter.append(testList.get(currentRow)[1]);
                         fileWriter.close();
                     }catch (IOException e) {
@@ -78,6 +80,7 @@ public class CSVPreProcess {
                     try {
                         fileWriter = new FileWriter(file);
                         // System.out.println("CREATE TEST "+file.getPath());
+                        fileWriter.append("USER: ").append(testList.get(currentRow)[2]).append("TIME: ").append(testList.get(currentRow)[0]).append(" ");
                         fileWriter.append(testList.get(currentRow)[1]);
                         fileWriter.close();
                     }catch (IOException e) {
@@ -92,6 +95,7 @@ public class CSVPreProcess {
                     try {
                         fileWriter = new FileWriter(file);
                         // System.out.println("CREATE TEST "+file.getPath());
+                        fileWriter.append("USER: ").append(testList.get(currentRow)[2]).append("TIME: ").append(testList.get(currentRow)[0]).append(" ");
                         fileWriter.append(testList.get(currentRow)[1]);
                         fileWriter.close();
                     }catch (IOException e) {
@@ -107,6 +111,7 @@ public class CSVPreProcess {
             File file = new File(testFilePath+"/"+(++trainid)+".txt");
             try {
                 FileWriter fileWriter = new FileWriter(file);
+                //fileWriter.append("USER: ").append(testList.get(currentRow)[2]).append("TIME: ").append(testList.get(currentRow)[0]).append(" ");
                 fileWriter.append(testList.get(currentRow)[1]);
 
                 fileWriter.close();
