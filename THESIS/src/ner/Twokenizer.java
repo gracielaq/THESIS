@@ -64,6 +64,7 @@ public class Twokenizer {
 	private static Pattern Whitespace = Pattern.compile("\\s+");
 
 	private static String hash = "('*#([A-Za-z])+'*)";
+	private static String level = "[Aa-zZ]*\\s(deep)";
 	
 	//magnitude or signal + number
 	private static String magnitude = "([Mm]ag(nitude)?\\s\\d(.\\d)?)|((\\d(.\\d)?\\s)?[Mm]ag(nitude)?)";
@@ -143,6 +144,7 @@ public class Twokenizer {
 				+ numInjured + "|"
 				+ numLost + "|"
 				+ magnitude + "|"
+                + level + "|"
 				+ signal + "|"
 				+ url + "|" 
 				+ entity + "|"

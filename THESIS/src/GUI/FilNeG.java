@@ -4,19 +4,18 @@ import Classifier.SVM.Classifier;
 import Classifier.SVM.Train;
 import liblinear.Linear;
 import main.RevisedMain;
-import org.apache.commons.io.FileUtils;
 import preprocess.csv.CSVPreProcess;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.io.*;
 import java.nio.Buffer;
 
-/**
- * Created by gracielaquiambao on 10/12/16.
- */
+
 public class FilNeG extends JFrame {
 
     private JPanel filnegPane;
@@ -26,6 +25,8 @@ public class FilNeG extends JFrame {
     private JButton button1;
     private JButton typhoonButton;
     private JButton floodButton;
+    private JLabel header;
+    private JScrollPane newsScrollPane;
     public int earthquakeGenerated=0,typhoonGenerated=0, floodGenerated=0;
 
     public FilNeG() {
@@ -96,6 +97,7 @@ public class FilNeG extends JFrame {
             svmAccu.append("\nTyphoon: "+typhoonGenerated);
             svmAccu.append("\nEarthquake: "+ earthquakeGenerated);
             svmAccu.append("\nFlood: "+floodGenerated);
+            svmAccu.setEditable(false);
         }
         catch(Exception except){
             except.printStackTrace();
@@ -103,19 +105,23 @@ public class FilNeG extends JFrame {
         //NEWS TEXT AREA, DEFAULT EARTHQUAKE
         news.setText("");
         File[] earthquakeFiles=new File("EarthquakeNewsReport").listFiles();
-        news.append("\nNEWS: EARTHQUAKE" + "\n ======================");
+
+        //set header
+        try {
+            header.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("EarthquakeHeader.jpg"))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //end of set header
         for(File textFile:earthquakeFiles){
             try {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(textFile), "UTF8"));
 
                 String line="";
-                String exampleOut="";
 
                 while((line=bufferedReader.readLine())!=null){
-
-                    news.append("\n"+line+"\n");
-                    exampleOut+=line+"\n";
-
+                    news.append("" + line + "\n\n");
                 }
                 bufferedReader.close();
 
@@ -129,8 +135,14 @@ public class FilNeG extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 news.setText(" ");
+                //set header
+                try {
+                    header.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("EarthquakeHeader.jpg"))));
+                } catch (IOException a) {
+                    a.printStackTrace();
+                }
+                //end of set header
                 File[] earthquakeFiles=new File("EarthquakeNewsReport").listFiles();
-                news.append("\nNEWS: EARTHQUAKE" + "\n =======================");
                 for(File textFile:earthquakeFiles){
                     try {
                         BufferedReader bufferedReader = new BufferedReader(new FileReader(textFile));
@@ -154,8 +166,14 @@ public class FilNeG extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 news.setText("");
+                //set header
+                try {
+                    header.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("TyphoonHeader.jpg"))));
+                } catch (IOException a) {
+                    a.printStackTrace();
+                }
+                //end of set header
                 File[] typhoonFiles=new File("TyphoonNewsReport").listFiles();
-                news.append("\nNEWS: TYPHOON" + "\n ====================");
                 for(File textFile:typhoonFiles){
                     try {
                         BufferedReader bufferedReader = new BufferedReader(new FileReader(textFile));
@@ -180,8 +198,14 @@ public class FilNeG extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 news.setText("");
+                //set header
+                try {
+                    header.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("FloodHeader.jpg"))));
+                } catch (IOException a) {
+                    a.printStackTrace();
+                }
+                //end of set header
                 File[] floodFiles=new File("FloodNewsReport").listFiles();
-                news.append("\nNEWS: FLOOD" + "\n ========================");
                 for(File textFile:floodFiles){
                     try {
                         BufferedReader bufferedReader = new BufferedReader(new FileReader(textFile));
@@ -219,5 +243,6 @@ public class FilNeG extends JFrame {
         FilNeG filNeG = new FilNeG();
         filNeG.setVisible(true);
     }
+
 
 }

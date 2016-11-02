@@ -205,7 +205,7 @@ public class tempBean {
 
 		for(int x=0;x<locations.size();x++){
 			if(x==locations.size()-1){
-				lugarString+=" & ";
+				lugarString+=" at ";
 				lugarString+=locations.get(x);
 
 			}else if(x==locations.size()-2){

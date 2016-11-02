@@ -9,8 +9,8 @@
       <alignmentX value="0.0"/>
       <alignmentY value="0.0"/>
       <autoscrolls value="false"/>
-      <background color="-9534581"/>
-      <doubleBuffered value="true"/>
+      <background color="-2039584"/>
+      <doubleBuffered value="false"/>
       <maximumSize width="1125" height="700"/>
       <minimumSize width="1125" height="700"/>
       <preferredSize width="1125" height="700"/>
@@ -64,6 +64,7 @@
               <background color="-1135564"/>
               <icon value="GUI/icon3.jpg"/>
               <text value="Typhoon"/>
+              <toolTipText value="Typhoon"/>
             </properties>
           </component>
           <component id="ffd78" class="javax.swing.JButton" binding="earthquakeButton">
@@ -78,6 +79,7 @@
               <background color="-12826029"/>
               <icon value="GUI/icon1.jpg"/>
               <text value="Earthquake"/>
+              <toolTipText value="Earthquake"/>
             </properties>
           </component>
           <vspacer id="c1ce3">
@@ -113,6 +115,7 @@
               <background color="-13389366"/>
               <icon value="GUI/icon2.jpg"/>
               <text value="Flood"/>
+              <toolTipText value="Flood"/>
             </properties>
           </component>
           <vspacer id="18149">
@@ -124,43 +127,74 @@
           </vspacer>
         </children>
       </grid>
-      <grid id="81dbd" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="0">
+      <grid id="81dbd" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="0">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="1" use-parent-layout="false">
             <preferred-size width="504" height="514"/>
+            <maximum-size width="504" height="514"/>
           </grid>
         </constraints>
         <properties>
           <alignmentX value="0.0"/>
           <alignmentY value="0.0"/>
           <background color="-2039584"/>
+          <enabled value="false"/>
           <focusable value="true"/>
+          <opaque value="true"/>
         </properties>
         <border type="none"/>
         <children>
-          <scrollpane id="46ed1">
+          <scrollpane id="46ed1" binding="newsScrollPane">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="1" use-parent-layout="false">
-                <minimum-size width="500" height="300"/>
-                <preferred-size width="500" height="300"/>
-                <maximum-size width="500" height="300"/>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="480" height="300"/>
+                <maximum-size width="480" height="500"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <autoscrolls value="false"/>
+              <verticalScrollBarPolicy value="22"/>
+            </properties>
             <border type="none"/>
             <children>
               <component id="e5325" class="javax.swing.JTextArea" binding="news">
                 <constraints/>
                 <properties>
                   <background color="-592653"/>
+                  <columns value="1"/>
+                  <enabled value="true"/>
                   <font name="Damascus" size="12"/>
-                  <lineWrap value="false"/>
-                  <text value="&#10;&#10;&#10;&#10;"/>
+                  <lineWrap value="true"/>
+                  <maximumSize width="-1" height="-1"/>
+                  <minimumSize width="-1" height="-1"/>
+                  <preferredSize width="480" height="3900"/>
+                  <rows value="300"/>
+                  <tabSize value="0"/>
+                  <text value="&#10;"/>
+                  <wrapStyleWord value="true"/>
                 </properties>
               </component>
             </children>
           </scrollpane>
+          <component id="93e30" class="javax.swing.JLabel" binding="header">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <vspacer id="2d1b3">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </vspacer>
+          <vspacer id="e0cbc">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </vspacer>
         </children>
       </grid>
       <grid id="e6a63" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="0">
@@ -226,7 +260,7 @@
                   <component id="7a0ae" class="javax.swing.JButton" binding="button1" default-binding="true">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                        <preferred-size width="193" height="32"/>
+                        <preferred-size width="190" height="32"/>
                         <maximum-size width="120" height="32"/>
                       </grid>
                     </constraints>

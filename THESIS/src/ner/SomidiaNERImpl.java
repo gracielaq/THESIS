@@ -67,17 +67,17 @@ public class SomidiaNERImpl implements NERInterface {
 					token.setNERTag("TYPHOON-NAME");
 					tweet.replaceToken(i, token);
 					break;
-				} else if(Pattern.matches("(#)*(((B|b)agyong)|(T|t)yphoon)(\\s#*(P|p)apangalanang)*\\s?'*(([A-Za-z]+'*)|('*#([A-Za-z])+'*))"
+				} else if(Pattern.matches("(#)*(((B|b)agyong)|(T|t)yphoon)(\\s#*(P|p)apangalanang)*\\s?('*([A-Za-z]+'*)|('*#([A-Za-z])+'*))"
 						,token.getWord())){
 					token.setNERTag("TYPHOON-NAME");
 					tweet.replaceToken(i, token);
 					break;
-				}else if(Pattern.matches("([Mm]agnitude((\\s)|(\\s?=\\s?)|(:))\\d(.\\d)?)|(\\d((.\\d)?\\s)?(-)?[Mm]agnitude)"
+				}else if(Pattern.matches("(([Mm]agnitude\\s?[^a-zA-Z^0-9]\\s?\\d(.\\d)?)|(\\d(.\\d)?\\s?[^a-zA-Z^0-9]\\s?[Mm]agnitude))"
 						,token.getWord())){
 					token.setNERTag("MAGNITUDE");
 					tweet.replaceToken(i, token);
 					break;
-				}else if(Pattern.matches("(\\b[Ss]ignal)\\s((#(\\s)*\\d)|([Nn]o(.)*\\d)|\\d)"
+				}else if(Pattern.matches("(\\b[Ss]ignal)\\s?((#(\\s)?\\d)|([Nn]o(.)*\\d)|\\d)"
 						,token.getWord())){
 					token.setNERTag("SIGNAL");
 					tweet.replaceToken(i, token);
@@ -108,7 +108,7 @@ public class SomidiaNERImpl implements NERInterface {
 					token.setNERTag("KMPH");
 					tweet.replaceToken(i, token);
 					break;
-				}else if(Pattern.matches("[A-Za-z]+(\\s)*(-)*(deep)"
+				}else if(Pattern.matches("(([A-Za-z]+(\\s)*(-)*(deep))|(lagpas-tao))"
                         ,token.getWord())){
                     token.setNERTag("WATERLEVEL");
                     tweet.replaceToken(i, token);

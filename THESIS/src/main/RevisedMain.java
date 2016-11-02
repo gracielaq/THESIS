@@ -105,7 +105,7 @@ public class RevisedMain {
         CSVPreProcess.createWekaFile(new File("train.txt"),new File("wekatrain.arff"));
         CSVPreProcess.createWekaFile(new File("test.txt"),new File("wekatest.arff"));
 
-        // Start NER
+		// Start NER
 		// Typhoon
 		ArrayList<ArrayList<String>> preNER = Twokenizer.tokenizeFile(new File(
 				"ModelAndTrain/dev/Typhoon"));
@@ -120,10 +120,10 @@ public class RevisedMain {
 			postNER.add(NamedEntities);
 
 			ArrayList<Token> tokenList = TemplateModule.processSentence(NamedEntities);
-			for(Token token :tokenList){
-				token.PrintToken();
-				System.out.print("\n");
-			}
+//			for(Token token :tokenList){
+//				token.PrintToken();
+//				System.out.print("\n");
+//			}
 			
 			tempBean temp = tempBean.createTempBean(tokenList);
 			String news = TemplateModule.Typhoon(temp);
@@ -150,10 +150,10 @@ public class RevisedMain {
 			ArrayList<Token> tokenList2 = TemplateModule.processSentence(NamedEntities2);
 
 			//printing tokens na may tag
-			for(Token token :tokenList2){
-				token.PrintToken();
-				System.out.print("\n");
-			}
+//			for(Token token :tokenList2){
+//				token.PrintToken();
+//				System.out.print("\n");
+//			}
 
 			//nilalagay sa bean yung mga entity
 			tempBean temp2 = tempBean.createTempBean(tokenList2);
@@ -183,10 +183,10 @@ public class RevisedMain {
 			postNER3.add(NamedEntities3);
 
 			ArrayList<Token> tokenList3 = TemplateModule.processSentence(NamedEntities3);
-			for(Token token :tokenList3){
-				token.PrintToken();
-				System.out.print("\n");
-			}
+//			for(Token token :tokenList3){
+//				token.PrintToken();
+//				System.out.print("\n");
+//			}
 			
 			tempBean temp3 = tempBean.createTempBean(tokenList3);
 			
@@ -201,7 +201,6 @@ public class RevisedMain {
 		fileCSV=file+"";
 		return fileCSV;
 	}
-
 
 	public static File getFolderPath() {
 		JFileChooser chooser = new JFileChooser();
